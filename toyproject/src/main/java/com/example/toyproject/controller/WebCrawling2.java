@@ -16,7 +16,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class WebCrawling {
+public class WebCrawling2 {
 
 	public static void main(String[] args) throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "C:/dev/Workspace-sts/chromedriver.exe");
@@ -29,7 +29,8 @@ public class WebCrawling {
         ChromeDriver driver = new ChromeDriver(options);
 		
 		driver.get(
-				"https://www.google.com/search?q=%ED%86%A0%EC%9D%B4+%ED%91%B8%EB%93%A4&stick=H4sIAAAAAAAAAONgFuLUz9U3SCqxzClS4gIxK_JMU7IstdSyk630kzLzc_LTK_VT8nNTi0sykxNLUlPiE_MycxNzrJKKUlNTih8xxnMLvPxxT1gqbNKak9cYA7iI1CikxsXmmleSWVIpJMPFK4VwhQaDFDcXgsuziJX3bduCN3O3KLyduOP15CUT2BgBNxaDjrYAAAA&source=lnms&tbm=isch&sa=X&ved=2ahUKEwja9_eJnLDqAhXUyYsBHY-sCQoQ_AUoAXoECBMQAw&biw=1387&bih=937");
+				"https://www.google.com/search?hl=ko&q=%EC%95%A0%EA%B2%AC%EC%A2%85%EB%A5%98&sa=X&ved=2ahUKEwiljNHhpLDqAhVvw4sBHf_XBDEQ1QIoAXoECBAQAg&biw=1387&bih=937"
+				+ "");
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		while (true) {
@@ -44,15 +45,24 @@ public class WebCrawling {
 				break;
 		}
 		
-		WebCrawling t = new WebCrawling();
-		List<WebElement> list = driver.findElements(By.cssSelector(".rg_i"));
+		WebCrawling2 t = new WebCrawling2();
+		List<WebElement> list = driver.findElementsByXPath("//*[@id=\"kp-wp-tab-overview\"]/div/div/div/div/div[1]/div/div/div/div/span[1]");
+		
 
-		for (int i = 0; i < list.size(); i++) {
-			WebElement el = list.get(i);
-			String src = el.getAttribute("src");
-			System.out.println(src);
-			t.DownloadImage(src, i);
-		}
+//		for (int i = 0; i < list.size(); i++) {
+			WebElement el = list.get(0);
+			String text = el.getText();
+			System.out.println(text);
+			
+//			String src = el.getAttribute("");
+//			System.out.println(src);
+//			t.DownloadImage(src, i);
+//		}
+			
+			List<WebElement> list1 = driver.findElementsByXPath("//*[@id=\"kp-wp-tab-overview\"]/div/div/div/div/div[2]/div/div/span[2]");
+			WebElement el1 = list1.get(0);
+			String text1 = el1.getText();
+			System.out.println(text1);
 	}
 
 	public void DownloadImage(String address, int i) {
