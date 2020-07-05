@@ -133,3 +133,6 @@ public class BoardController {
 	}
 
 }
+
+
+//JSON형태로 변환된 데이터를 ajax로 파싱
