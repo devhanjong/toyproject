@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 import lombok.extern.java.Log;
 
@@ -18,7 +18,6 @@ import lombok.extern.java.Log;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	CustomUsersService customUserService;
-	
 	
 	
 	//�씪諛섏쟻�씤 �뒪�봽留� �떆�걧由ы떚猷�

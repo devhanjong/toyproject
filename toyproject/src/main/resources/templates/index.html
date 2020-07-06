@@ -67,7 +67,10 @@ http://www.tooplate.com/view/2086-multi-color
                                     <a class="nav-link" href="#0" data-no="5" id="signin2">Keep in touch</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#0" data-no="6" id="signin">로그인</a>
+                                    <a class="nav-link" href="#0" data-no="6" id="signin" sec:authorize="!isAuthenticated()">로그인</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#0" data-no="6" id="logout" sec:authorize="isAuthenticated()">로그아웃</a>
                                 </li>
                             </ul>
                         </div>                        
@@ -715,6 +718,15 @@ http://www.tooplate.com/view/2086-multi-color
                 $(function() {
         			$("#signin").on("click", function() {
 						location.href='loginResistForm';
+						return false;
+        			});
+        		});
+                
+                /* Collapse menu after click 
+                -----------------------------------------*/
+                $(function() {
+        			$("#logout").on("click", function() {
+						location.href='logout';
 						return false;
         			});
         		});

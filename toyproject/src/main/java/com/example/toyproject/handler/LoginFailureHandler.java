@@ -16,35 +16,36 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 
 import com.example.toyproject.security.CustomUsersService;
 
+import lombok.Data;
+
+@Data
 public class LoginFailureHandler implements AuthenticationFailureHandler {
-	
-	@Autowired
-	CustomUsersService CUS;
-	
-	
+
+	private String loginidname;
+	private String loginpwdname;
+	private String errorMessage;
+	private String defaultFailureUrl;
+
 	@Override
 	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 			AuthenticationException exception) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		String errorMessage = null;
-		
-		if(exception instanceof BadCredentialsException || exception instanceof InternalAuthenticationServiceException) {
+
+		if (exception instanceof BadCredentialsException
+				|| exception instanceof InternalAuthenticationServiceException) {
 			errorMessage = "���̵� ��й�ȣ�� ���� �ʽ��ϴ�. bad ID or Password";
-		}
-		else if (exception instanceof DisabledException) {
-			
+		} else if (exception instanceof DisabledException) {
+
 			errorMessage = "������ ��Ȱ��ȭ �Ǿ����ϴ�. account is disabled";
 		}
 //		else if (exception instanceof CredentialExpiredException) {
 //			errorMessage = "��й�ȣ ��ȿ�Ⱓ ����. Password expiration"; 	
 //		}
-			
-		
-	}
-	
-	public void loginFailuerCount(String username) {
-		
+
 	}
 
-	
+	public void loginFailuerCount(String username) {
+
+	}
+
 }

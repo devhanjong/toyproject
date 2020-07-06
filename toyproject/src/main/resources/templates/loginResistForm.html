@@ -4,6 +4,11 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
+
+  <script type="text/javascript" sec:authorize="isAuthenticated()">
+        location.href = "/home"
+    </script>
+    
 	<div class="wrap">
 		<div class="form-wrap">
 			<div class="button-wrap">
