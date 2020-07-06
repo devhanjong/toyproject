@@ -9,6 +9,8 @@ import com.example.toyproject.model.Member;
 public interface MemberRepository extends JpaRepository<Member, String>{
 	
 	Member findByUid(String uid);
+
+	Member findByUidAndUpw(String uid, String upw);
 	
 }
   

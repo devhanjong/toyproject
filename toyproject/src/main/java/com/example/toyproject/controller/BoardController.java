@@ -30,7 +30,7 @@ public class BoardController {
 	@Autowired
 	BoardRepository boardRepository;
 	@Autowired
-	HttpSession session;
+	HttpSession session;   
 	@RequestMapping("/board") // 하나의 주소로 만들어주는거 /board랑 /write합쳐서 => /board/write로 주소가 지정된다	
 	
 	
@@ -48,7 +48,7 @@ public class BoardController {
 	// 뭘 수정할지 조회해야
 	@GetMapping("/{id}") // <-- id라는 명칭은 개발자가 임의로 만들어낸 명칭 localhost:8080/board/20
 	public String boardDetail(Model model, @PathVariable("id") long id) {
-		System.out.println("!@@@" + id);
+		System.out.println("확인!@@@" + id);
 		// jpa로 해당 아이디 게시물을 조회해야
 		Optional<Board> opt = boardRepository.findById(id); // 옵셔널클래스컬렉션타입 데이터타입은 보드
 		Board board = opt.get();
@@ -73,8 +73,8 @@ public class BoardController {
 		if (member == null) { // 로그인 X
 			return "0";
 		} else { // 로그인 O
-			String memberId = member.getUid();
-			board.setAuthorMemberId(memberId);
+			String userId = member.getUid();
+			board.setAuthorMember(userId); 
 			boardRepository.save(board);
 		}
 		return "1";
@@ -92,9 +92,9 @@ public class BoardController {
 	}
 	@PostMapping("/update/{id}")
 	public String boardUpdatePost(@ModelAttribute Board board, @PathVariable("id") long id) {
-		Member member = (Member) session.getAttribute("member_info");
+		Member member = (Member) session.getAttribute("user_info");
 		String memberId = member.getUid();
-		board.setAuthorMemberId(memberId);
+		board.setAuthorMember(memberId);;
 		board.setBbsId(id);
 		boardRepository.save(board);
 		return "redirect:/board/" + id;
@@ -112,23 +112,23 @@ public class BoardController {
 	
 	@GetMapping("/") 
 	public String board(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
-//		int startPage = (page - 1) / 10 * 10 + 1;
-//		int endPage = startPage + 9;
-//		
-//		PageRequest req = PageRequest.of(page - 1, 10, Sort.by(Direction.DESC, "id")); // 0페이지부터
-//		// 주소창에 http://localhost:8080/board/?page=10 확인
-//
-//		Page<Board> result = boardRepository.findAll(req);
-//		int totalPage = result.getTotalPages();
-//		if (endPage > totalPage) {
-//			endPage = totalPage;
-//		}
-//		List<Board> list = result.getContent();
-//		model.addAttribute("list", list);
-//		model.addAttribute("startPage", startPage);
-//		model.addAttribute("endPage", endPage);
-//		model.addAttribute("totalPage", totalPage);
-//		model.addAttribute("page", page);
+		int startPage = (page - 1) / 10 * 10 + 1;
+		int endPage = startPage + 9;
+		
+		PageRequest req = PageRequest.of(page - 1, 10, Sort.by(Direction.DESC, "id")); // 0페이지부터
+		// 주소창에 http://localhost:8080/board/?page=10 확인
+
+		Page<Board> result = boardRepository.findAll(req);
+		int totalPage = result.getTotalPages();
+		if (endPage > totalPage) {
+			endPage = totalPage;
+		}
+		List<Board> list = result.getContent();
+		model.addAttribute("list", list);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+		model.addAttribute("totalPage", totalPage);
+		model.addAttribute("page", page);
 		return "board/list";
 	}
 
