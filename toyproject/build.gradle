@@ -32,6 +32,26 @@ dependencies {
 	}
 compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 	implementation "org.springframework.boot:spring-boot-devtools"
+	// https://mvnrepository.com/artifact/com.google.api-client/google-api-client
+	compile group: 'com.google.api-client', name: 'google-api-client', version: '1.25.0'
+
+	// https://mvnrepository.com/artifact/com.google.apis/google-api-services-youtube
+	compile group: 'com.google.apis', name: 'google-api-services-youtube', version: 'v3-rev212-1.25.0'
+
+	compile group: 'com.google.apis', name: 'google-api-services-youtubeAnalytics', version: 'v1-rev14-1.13.2-beta'
+
+	// https://mvnrepository.com/artifact/com.google.apis/google-api-services-youtubereporting
+	compile group: 'com.google.apis', name: 'google-api-services-youtubereporting', version: 'v1-rev1-1.20.0'
+
+	// https://mvnrepository.com/artifact/com.google.oauth-client/google-oauth-client-jetty
+	compile("com.google.oauth-client:google-oauth-client-jetty:1.25.0") {
+		exclude group: 'org.mortbay.jetty', module: 'servlet-api'
+	}
+// https://mvnrepository.com/artifact/com.google.http-client/google-http-client-jackson2
+	compile group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.25.0'
+
+	// https://mvnrepository.com/artifact/com.google.collections/google-collections
+	compile group: 'com.google.collections', name: 'google-collections', version: '1.0'
 }
 
 test {
