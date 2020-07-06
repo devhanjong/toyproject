@@ -25,6 +25,6 @@ public class Board {
 	
 	@CreationTimestamp
 	private LocalDate bbsCreateDate; 	//게시판 생성일자
-	private int views; 					//게시글 조회수
+	private int views; 					//게시글 조회수s
 	private int comments;				//게시글 댓글수
 }

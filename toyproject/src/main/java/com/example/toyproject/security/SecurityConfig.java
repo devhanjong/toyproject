@@ -8,7 +8,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import com.example.toyproject.handler.LoginSuccessHandler;
 
 import lombok.extern.java.Log;
 
@@ -34,12 +36,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.and()
 		.formLogin()
 		.loginPage("/loginResistForm")
-		.defaultSuccessUrl("/home")
+		.successHandler(authenticationSuccessHandler())
+//		.failureHandler(authenticationFailureHandler())
 		.permitAll()
 		.and()
 		.logout()
-		.logoutSuccessUrl("/home")
 		.logoutUrl("/logout")
+		.logoutSuccessUrl("/home")
 		.invalidateHttpSession(true);
 		
 		
@@ -72,6 +75,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		auth.userDetailsService(customUserService).passwordEncoder(passwordEncoder());
 	}
 
+	@Bean
+	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+		LoginSuccessHandler successHandler = new LoginSuccessHandler();
+		
+		return successHandler;
+	}
+}
+	
+
+/*
+ * FailureHandler bean register
+ */
+//@Bean
+//public AuthenticationFailureHandler authenticationFailureHandler() {
+//    LoginFailureHandler failureHandler = new LoginFailureHandler();
+//    failureHandler.setDefaultFailureUrl("/loginResistForm");
+//    return failureHandler;
+//}
+//	
+//	
+//}
 	
 	
 //		
@@ -104,10 +128,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //        ;
 //    }
 	
-
 	
-	
-}
 
 		
 //		return new PasswordEncoder() {
@@ -117,25 +138,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 //			
 //			
 
-/*
- * SuccessHandler bean register
- */
-//@Bean
-//public AuthenticationSuccessHandler authenticationSuccessHandler() {
-//    CustomAuthenticationSuccessHandler successHandler = new CustomAuthenticationSuccessHandler();
-//    successHandler.setDefaultTargetUrl("/index");
-//    return successHandler;
-//}
 
-/*
- * FailureHandler bean register
- */
-//@Bean
-//public AuthenticationFailureHandler authenticationFailureHandler() {
-//    CustomAuthenticationFailureHandler failureHandler = new CustomAuthenticationFailureHandler();
-//    failureHandler.setDefaultFailureUrl("/loginPage?error=error");
-//    return failureHandler;
-//}
 
 /*
  * LogoutSuccessHandler bean register

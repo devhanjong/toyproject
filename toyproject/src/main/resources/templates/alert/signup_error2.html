@@ -1,0 +1,9 @@
+<!-- 자바스크립트 내에서 타임리프 사용하기 -->
+<script th:inline="javascript">
+/*<![CDATA[*/
+	alert("중복 이메일입니다.");
+	var email = /*[[${email}]]*/;
+	var name = /*[[${name}]]*/;
+	location = `/signup?email=${email}&name=${name}`;
+/*]]>*/
+</script>

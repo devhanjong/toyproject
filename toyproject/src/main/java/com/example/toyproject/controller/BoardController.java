@@ -45,6 +45,7 @@ public class BoardController {
 		model.addAttribute("board", board);// k,v
 		return "board/detail";
 	}
+	
 	// 뭘 수정할지 조회해야
 	@GetMapping("/{id}") // <-- id라는 명칭은 개발자가 임의로 만들어낸 명칭 localhost:8080/board/20
 	public String boardDetail(Model model, @PathVariable("id") long id) {
@@ -57,51 +58,6 @@ public class BoardController {
 		return "board/detail";
 	}
 
-	
-	
-
-	@GetMapping("/write") // board패키지 만들어주고 "/board/wrtie
-	public String boardWrite() {
-		return "/board/write";
-	}
-	@PostMapping("/write") 
-	@ResponseBody
-	public String boardWritePost(@ModelAttribute Board board) {
-		System.out.println(board);
-		/* 로그인 여부 확인 (세션의 값 확인) */
-		Member member = (Member) session.getAttribute("member_info");
-		if (member == null) { // 로그인 X
-			return "0";
-		} else { // 로그인 O
-			String userId = member.getUid();
-			board.setAuthorMember(userId); 
-			boardRepository.save(board);
-		}
-		return "1";
-	}
-
-	
-
-	@GetMapping("/update/{id}")
-	public String boardUpdate(Model model, @PathVariable("id") long id) {
-		// jpa로 해당 아이디 게시물을 조회해야
-		Optional<Board> data = boardRepository.findById(id);
-		Board board = data.get();
-		model.addAttribute("board", board);
-		return "board/update";
-	}
-	@PostMapping("/update/{id}")
-	public String boardUpdatePost(@ModelAttribute Board board, @PathVariable("id") long id) {
-		Member member = (Member) session.getAttribute("user_info");
-		String memberId = member.getUid();
-		board.setAuthorMember(memberId);;
-		board.setBbsId(id);
-		boardRepository.save(board);
-		return "redirect:/board/" + id;
-	}
-
-
-
 	@GetMapping("/delete/{id}")
 	public String boardDelete(@PathVariable("id") long id) {
 		// jpa로 해당 아이디 게시물을 조회해야
@@ -110,7 +66,11 @@ public class BoardController {
 	}
 
 	
-	@GetMapping("/") 
+	
+	
+
+
+	@GetMapping("/list") 
 	public String board(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
 		int startPage = (page - 1) / 10 * 10 + 1;
 		int endPage = startPage + 9;
@@ -132,7 +92,56 @@ public class BoardController {
 		return "board/list";
 	}
 
+
+	
+
+	@GetMapping("/write") // board패키지 만들어주고 "/board/wrtie
+	public String boardWrite() {
+		return "/board/write";
+	}
+	@PostMapping("/write") 
+	@ResponseBody
+	public String boardWritePost(@ModelAttribute Board board) {
+		System.out.println(board);
+		/* 로그인 여부 확인 (세션의 값 확인) */
+		Member member = (Member) session.getAttribute("user_info");
+		if (member == null) { // 로그인 X
+			return "0";
+		} else { // 로그인 O
+			String userId = member.getUid();
+			board.setAuthorMember(userId); 
+			boardRepository.save(board);
+		}
+		return "1";
+	}
+
+
+
+	
+
+	@GetMapping("/update/{id}")
+	public String boardUpdate(Model model, @PathVariable("id") long id) {
+		// jpa로 해당 아이디 게시물을 조회해야
+		Optional<Board> data = boardRepository.findById(id);
+		Board board = data.get();
+		model.addAttribute("board", board);
+		return "board/update";
+	}
+	
+	@PostMapping("/update/{id}")
+	public String boaStringrdUpdatePost(@ModelAttribute Board board, @PathVariable("id") long id) {
+		Member member = (Member) session.getAttribute("user_info");
+		String memberId = member.getUid();
+		board.setAuthorMember(memberId);;
+		board.setBbsId(id);
+		boardRepository.save(board);
+		return "redirect:/board/" + id;
+	}
 }
+
+
+
+	
 
 
 //JSON형태로 변환된 데이터를 ajax로 파싱

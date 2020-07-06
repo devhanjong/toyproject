@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
@@ -38,6 +37,8 @@ public class MemberController {
 		String encryptPw = passwordeEncoder.encode(member.getUpw()); 
 		
 		member.setUpw(encryptPw);
+		member.setEnable(1);
+		member.setFailcount(0);
 		
 		System.out.println(member);
 		

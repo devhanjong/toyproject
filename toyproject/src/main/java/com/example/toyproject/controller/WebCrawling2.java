@@ -65,17 +65,17 @@ public class WebCrawling2 {
 			System.out.println(text1);
 	}
 
-	public void DownloadImage(String address, int i) {
-		try {
-			URL imageURL = new URL(address);
-			BufferedImage saveimage = ImageIO.read(imageURL);
-			ImageIO.write(saveimage, "jpg", new File("c:/dev/" + i + ".jpg"));
+//	public void DownloadImage(String address, int i) {
+//		try {
+//			URL imageURL = new URL(address);
+//			BufferedImage saveimage = ImageIO.read(imageURL);
+//			ImageIO.write(saveimage, "jpg", new File("c:/dev/" + i + ".jpg"));
+//
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-	}
+//	}
 
 }
