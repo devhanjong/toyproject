@@ -1,0 +1,27 @@
+{"properties": [
+  {
+    "name": "YouTube.Search.List",
+    "type": "java.lang.String",
+    "description": "A description for 'YouTube.Search.List'"
+  },
+  {
+    "name": "search.setQ(queryTerm);",
+    "type": "java.lang.String",
+    "description": "A description for 'search.setQ(queryTerm);'"
+  },
+  {
+    "name": "search.setType(\"video\");",
+    "type": "java.lang.String",
+    "description": "A description for 'search.setType(\"video\");'"
+  },
+  {
+    "name": "search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);",
+    "type": "java.lang.String",
+    "description": "A description for 'search.setMaxResults(NUMBER_OF_VIDEOS_RETURNED);'"
+  },
+  {
+    "name": "youtube.apikey",
+    "type": "java.lang.String",
+    "description": "A description for 'youtube.apikey'"
+  }
+]}
