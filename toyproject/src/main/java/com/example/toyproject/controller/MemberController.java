@@ -1,24 +1,52 @@
 package com.example.toyproject.controller;
 
-import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
+import lombok.extern.java.Log;
+
+@Log
 @Controller
 public class MemberController {
+	
+	@Autowired
+	PasswordEncoder passwordeEncoder;
+	
 	@Autowired
 	MemberRepository memberRepository;
 	
-	@Autowired
-	HttpSession session;
+	@GetMapping("/loginResistForm")
+	public void signup() {
+		
+	}
+	@Transactional
+	@PostMapping("/resistResult")
+	public String SignupPost(@ModelAttribute("member") Member member) {
+		System.out.println(member);
+		log.info("MEMBER: " + member);
+		 
+		String encryptPw = passwordeEncoder.encode(member.getUpw()); 
+		
+		member.setUpw(encryptPw);
+		
+		System.out.println(member);
+		
+		memberRepository.save(member);
+		
+		return "/member/resistResult";
+	}
+
+
 	
 /*
 	@GetMapping("/signup")

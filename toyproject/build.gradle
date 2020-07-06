@@ -32,6 +32,11 @@ dependencies {
 	}
 compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141.59'
 	implementation "org.springframework.boot:spring-boot-devtools"
+	
+	//spring security
+	testImplementation 'org.springframework.security:spring-security-test'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 test {

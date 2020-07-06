@@ -8,16 +8,13 @@ import com.example.toyproject.repository.MemberRepository;
 
 @Controller
 public class HomeController {
-	
-	
-	@Autowired
-	MemberRepository ur;
-	
-	@GetMapping("/signup")
-	public String signup() {
+	 
+	@GetMapping("/home")
+	public String home() { 
 		
-		return "signup";
+		return "index";
 	}
+	
 	
 }
  

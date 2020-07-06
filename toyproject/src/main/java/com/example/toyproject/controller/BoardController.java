@@ -73,7 +73,7 @@ public class BoardController {
 		if (member == null) { // 로그인 X
 			return "0";
 		} else { // 로그인 O
-			String memberId = member.getMemberID();
+			String memberId = member.getUid();
 			board.setAuthorMemberId(memberId);
 			boardRepository.save(board);
 		}
@@ -93,7 +93,7 @@ public class BoardController {
 	@PostMapping("/update/{id}")
 	public String boardUpdatePost(@ModelAttribute Board board, @PathVariable("id") long id) {
 		Member member = (Member) session.getAttribute("member_info");
-		String memberId = member.getMemberID();
+		String memberId = member.getUid();
 		board.setAuthorMemberId(memberId);
 		board.setBbsId(id);
 		boardRepository.save(board);

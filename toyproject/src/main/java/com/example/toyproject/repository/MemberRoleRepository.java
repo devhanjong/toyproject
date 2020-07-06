@@ -1,14 +1,17 @@
 package com.example.toyproject.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.example.toyproject.model.Member;
+import com.example.toyproject.model.MemberRole;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, String>{
+public interface MemberRoleRepository extends JpaRepository<Member, String>{
 	
-	Member findByUid(String uid);
+	List<MemberRole> findByUid(String uid);
+	
 	
 }
-  
