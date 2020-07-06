@@ -11,8 +11,8 @@ import lombok.extern.java.Log;
 @Log
 public class SampleController {
 	
-	@GetMapping("/home")
-	public String home() {
+	@GetMapping("/home1")
+	public String home1() {
 		return "index";
 	}
 	
