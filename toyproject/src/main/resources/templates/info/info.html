@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td>번호</td>
+			<td>제목</td>
+			<td>내용</td>
+
+		</tr>
+		
+		<tr th:each="YoutubeVideoInfo : ${list[5]}">
+			<td th:text="${YoutubeVideoInfo.id}"></td>
+			<td th:text="${YoutubeVideoInfo.description}"></td>
+			<td th:text="${YoutubeVideoInfo.videoId}"></td>
+			
+			<td th:text="${YoutubeVideoInfo.title}"></td>
+		<!-- 	<img src=${thumbnails}></img>
+		 -->
+			
+			<iframe src="http://www.youtube.com/embed/" + "${YoutubeVideoInfo.videoId}" width="400" height="300"></iframe>
+			
+		</tr>
+	</table>
+	<hr>
+	<th:block th:each="pageNumber : ${#numbers.sequence(1, 10)}">
+		<span th:text="${pageNumber}"></span>
+	</th:block>
+	<script>
+	
+	</script>
+</body>
+</html>
