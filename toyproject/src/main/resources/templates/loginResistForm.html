@@ -1,0 +1,72 @@
+<html>
+<head>
+<title>펫타그램</title>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+
+  <script type="text/javascript" sec:authorize="isAuthenticated()">
+        location.href = "/home"
+    </script>
+    
+	<div class="wrap">
+		<div class="form-wrap">
+			<div class="button-wrap">
+				<div id="btn"></div>
+				<button type="button" class="togglebtn" onclick="login()">LOG IN</button>
+				<button type="button" class="togglebtn" onclick="register()">REGISTER</button>
+			</div>
+
+
+			<div class="social-icons">
+				<img src="img/fb.png" alt="facebook">
+				<img src="img/tw.png" alt="twitter">
+				<img src="img/gl.png" alt="google">
+			</div>
+			<form method="post" id="login" class="input-group">
+				<div th:if="${param.error != null}">
+					<h2>아이디 또는 비밀번호가 다릅니다.</h2>
+					<h2 th:value="${param.error}"></h2>
+				</div>
+				<div th:if="${param.logout !=null}">
+					<h2>You have been logged out.</h2>
+				</div>
+				<input type="text" id="username" name="username" class="input-field" placeholder="Enter ID" required>
+				<input type="password" id="password" name="password" class="input-field" placeholder="Enter Password" required>
+				<!--                     <input type="checkbox" class="checkbox"><span>Remember Password</span> -->
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+				<button class="submit">Login</button>
+			</form>
+
+			<form method="post" action="/resistResult" id="register" class="input-group">
+				<input type="text" name="uid" class="input-field" placeholder="User ID" required>
+				<input type="password" name="upw" class="input-field" placeholder="Enter Password" required>
+				<input type="text" name="uname" class="input-field" placeholder="Your Name" required>
+				<input type="email" name="uemail" class="input-field" placeholder="Your Email" required>
+				<input type="checkbox" name="roles[0].rolename" value="BASIC" checked>BASIC
+				<input type="checkbox" name="roles[1].rolename" value="MANAGER" checked>MANAGER
+				<input type="checkbox" name="roles[2].rolename" value="ADMIN" checked>ADMIN
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+				<button class="submit">REGISTER</button>
+			</form>
+		</div>
+	</div>
+	<script>
+		var x = document.getElementById("login");
+		var y = document.getElementById("register");
+		var z = document.getElementById("btn");
+
+		function login() {
+			x.style.left = "50px";
+			y.style.left = "450px";
+			z.style.left = "0";
+		}
+
+		function register() {
+			x.style.left = "-400px";
+			y.style.left = "50px";
+			z.style.left = "110px";
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Thymeleaf3</title>
+</head>
+<body>
+		<h2>회원정보를 확인하세요 </h2>
+		<p>
+			<label>ID</label>
+			<input type="text" name="uid" th:value="${member.uid}" readonly />
+		</p>
+		<p>
+			<label>UPW</label>
+			<input type="text" name="upw" th:value="${member.upw}" readonly />
+		</p>
+		<p>
+			<label>UNAME</label>
+			<input type="text" name="uname" th:value="${member.uname}" readonly />
+		</p>
+		<p>
+			<label>UEMAIL</label>
+			<input type="text" name="uemail" th:value="${member.uemail}" readonly />
+		</p>
+		<p>[[${member.roles}]]</p>
+</body>
+</html>
+
