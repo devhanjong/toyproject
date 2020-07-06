@@ -37,6 +37,8 @@ public class MemberController {
 		String encryptPw = passwordeEncoder.encode(member.getUpw()); 
 		
 		member.setUpw(encryptPw);
+		member.setEnable(1);
+		member.setFailcount(0);
 		
 		System.out.println(member);
 		

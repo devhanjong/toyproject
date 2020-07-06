@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
@@ -29,11 +30,14 @@ public class Member {
 	
 	private String uemail;
 	
+	private int Enable;  //if 0 == disable ,, 1 = Enable
+	
+	private int failcount;
+	
 	
 	@OneToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
 	@JoinColumn(name= "member")
 	private List<MemberRole> roles;  //�쉶�썝�쓽 沅뚰븳 
-	
 	
 	@UpdateTimestamp
 	private LocalDateTime updatedate;  //�쉶�썝�젙蹂� 理쒖쥌 �닔�젙�떆媛� 
