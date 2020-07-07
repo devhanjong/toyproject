@@ -17,10 +17,11 @@
 			<td th:text="${YoutubeVideoInfo.id}"></td>
 			<td th:text="${YoutubeVideoInfo.description}"></td>
 			<td th:text="${YoutubeVideoInfo.videoId}"></td>
+			<td th:text="${YoutubeVideoInfo.thumbnailUrl}"></td>
 			
 			<td th:text="${YoutubeVideoInfo.title}"></td>
-		<!-- 	<img src=${thumbnails}></img>
-		 -->
+			<iframe src=${YoutubeVideoInfo.thumbnailUrl} width="200" height="300"></iframe>
+		
 			
 			<iframe src="http://www.youtube.com/embed/" + "${YoutubeVideoInfo.videoId}" width="400" height="300"></iframe>
 			
