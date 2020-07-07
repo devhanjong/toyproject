@@ -31,7 +31,7 @@ public class MemberController {
 	@Transactional
 	@PostMapping("/resistResult")
 	public String SignupPost(@ModelAttribute("member") Member member) {
-		System.out.println(member);
+		//회원가입시 결과화면 
 		log.info("MEMBER: " + member);
 		 
 		String encryptPw = passwordeEncoder.encode(member.getUpw()); 
@@ -40,7 +40,6 @@ public class MemberController {
 		member.setEnable(1);
 		member.setFailcount(0);
 		
-		System.out.println(member);
 		
 		memberRepository.save(member);
 		

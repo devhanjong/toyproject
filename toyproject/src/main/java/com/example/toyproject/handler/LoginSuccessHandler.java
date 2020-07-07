@@ -15,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
 public class LoginSuccessHandler implements AuthenticationSuccessHandler { 
@@ -25,8 +26,11 @@ MemberRepository MR;
 	public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res,
 			Authentication authentication) throws IOException, ServletException {
 		clearAuthenticationAttributes(req);
-		MR.findById(req.getParameter("username")).get().setFailcount(0);
 		
+		//로그인 성공후 실패카운터 초기화 
+		Member mem = MR.findById(req.getParameter("username")).get();
+		mem.setFailcount(0);
+		MR.save(mem);
 		
 		Collection<? extends GrantedAuthority> list = authentication.getAuthorities();
 		Iterator<? extends GrantedAuthority> authlist = list.iterator();

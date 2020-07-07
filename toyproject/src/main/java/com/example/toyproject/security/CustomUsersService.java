@@ -27,11 +27,22 @@ public class CustomUsersService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Member member = memberRepository.findById(username).get();
 		Member memberrole = memberRoleRepository.findById(username).get();
+		
 		System.out.println("@@@@@" + memberrole.getRoles() );
-		String dBuserName = member.getUid(); 
-		if(dBuserName == null){
-		        throw new UsernameNotFoundException("User not authorized.");
-		    }
+		System.out.println(member.getUid());
+		String dBuserName = member.getUid();
+	
+		if(member.getEnable() == 0) {
+			//계정비활성화
+			return null;
+		}
+		
+//		if(dBuserName == null){
+//		        throw new UsernameNotFoundException("User not authorized.");
+//		    }
+		
+		return new CustomUserDetails(member); 
+	}
 //		User user = new User(username, member.getUpw(), (Collection<? extends GrantedAuthority>) memberrole.getRoles());
 //		Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")
 //		System.out.println(user);
@@ -40,16 +51,13 @@ public class CustomUsersService implements UserDetailsService{
 //				.filter(m -> m != null)
 //				.map(m -> new CustomSecurityUser(m)) 
 //				.get();
-		
+	
 //		System.out.println(user.getAuthorities());
 //		System.out.println(member);
 //		System.out.println(member.getRoles());
-		
-		
+	
+	
 //		return user;
-		
-		return new CustomUserDetails(member); 
-	}
 		
 //		System.out.printf("%s, %s, %s\n", user.getUsername(), user.getPassword(), user.getAuthorities());
 //		BCryptPasswordEncoder bc = new BCryptPasswordEncoder();
