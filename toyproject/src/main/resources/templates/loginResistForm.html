@@ -1,7 +1,9 @@
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>펫타그램</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -24,9 +26,8 @@
 				<img src="img/gl.png" alt="google">
 			</div>
 			<form method="post" id="login" class="input-group">
-				<div th:if="${param.error != null}">
-					<h2>아이디 또는 비밀번호가 다릅니다.</h2>
-					<h2 th:value="${param.error}"></h2>
+				<div th:if="${errorMessage != null}">
+					<h2 th:text="${errorMessage}"></h2>
 				</div>
 				<div th:if="${param.logout !=null}">
 					<h2>You have been logged out.</h2>
@@ -39,8 +40,15 @@
 			</form>
 
 			<form method="post" action="/resistResult" id="register" class="input-group">
-				<input type="text" name="uid" class="input-field" placeholder="User ID" required>
-				<input type="password" name="upw" class="input-field" placeholder="Enter Password" required>
+				<div class="form-group">
+				<input type="text" name="uid" class="input-field" placeholder="User ID" id=userId required>
+				<div class="check_font" id="id_check"></div>
+				</div>
+				<div class="form-group">
+				<input type="password" name="upw" class="input-field" id=userpw placeholder="Enter Password" required>
+				<input type="password" name="upw2" class="input-field" id=userpw2 placeholder="Check your Password" required>
+				<div class="check_font" id="pw_check"></div>
+				</div>
 				<input type="text" name="uname" class="input-field" placeholder="Your Name" required>
 				<input type="email" name="uemail" class="input-field" placeholder="Your Email" required>
 				<input type="checkbox" name="roles[0].rolename" value="BASIC" checked>BASIC
@@ -51,6 +59,7 @@
 			</form>
 		</div>
 	</div>
+	
 	<script>
 		var x = document.getElementById("login");
 		var y = document.getElementById("register");
@@ -68,5 +77,86 @@
 			z.style.left = "110px";
 		}
 	</script>
+	<script>
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+	$("#userId").blur(function() {
+		var userId = $('#userId').val();
+		$.ajax({
+			url : 'loginResistForm/idCheck?uid='+ userId, 
+			type : 'get',
+			success : function(data) {
+				
+									
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다.");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					}
+				else {
+						if(userId == ""){
+							$('#id_check').text('아이디를 입력해주세요');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+						} 
+						else{
+							$('#id_check').text('가입가능한 아이디입니다.');
+							$('#id_check').css('color', 'green');
+							$("#reg_submit").attr("disabled", true);	
+							
+						}
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+</script>
+<script>
+	$("#userpw2").hide();
+</script>
+<script>
+	$("#userpw").one("focusin", function(){
+		$("#userpw2").show();
+	});
+</script>
+	
+	<script>
+// 패스워드 유효성 검사 같으면 0 다르면 1
+	$("#userpw2").blur(function() {
+		var userpw1 = $('#userpw').val();
+		var userpw2 = $('#userpw2').val();
+		var csrf = $('#register > [name=_csrf]').val();
+		console.log(csrf)
+		$.ajax({
+			url : 'loginResistForm/pwCheck' , 
+			type : 'post',
+			data : {
+				'upw' : userpw1 , 'upw2' : userpw2,
+				'_csrf' : csrf
+			},
+			success : function(data) {
+				
+				console.log("1 = 다름 / 0 = 같음 : "+ data);		
+				
+				if (data == 1) {
+						// 1 : 다르면
+						$("#pw_check").text("비밀번호가 서로 다릅니다.");
+						$("#pw_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					}
+				else {
+							$('#pw_check').text('비밀번호가 일치합니다.');
+							$('#pw_check').css('color', 'green');
+							$("#reg_submit").attr("disabled", true);	
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+</script>
+
 </body>
 </html>

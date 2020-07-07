@@ -18,6 +18,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class LoginSuccessHandler implements AuthenticationSuccessHandler { 
 @Autowired
 MemberRepository MR;
@@ -25,9 +28,11 @@ MemberRepository MR;
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res,
 			Authentication authentication) throws IOException, ServletException {
+		log.error("enabled");
+		
 		clearAuthenticationAttributes(req);
 		
-		//로그인 성공후 실패카운터 초기화 
+		//로그인 성공후 실패카운터 초기화  
 		Member mem = MR.findById(req.getParameter("username")).get();
 		mem.setFailcount(0);
 		MR.save(mem);
@@ -36,14 +41,13 @@ MemberRepository MR;
 		Iterator<? extends GrantedAuthority> authlist = list.iterator();
 		String url ="/home";
 		
-		
 		while(authlist.hasNext()) {
 			GrantedAuthority authority = authlist.next();
 			if(authority.getAuthority().equals("ROLE_ADMIN")) {
 				url="/admin";
 			}
 	}
-		req.getSession().setAttribute("msg", "관리자페이지");
+		req.setAttribute("user_info", mem);
 		res.sendRedirect(url);
 		
 	}
