@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.toyproject.model.YoutubeVideoInfo;
 import com.example.toyproject.repository.YoutubeRepository;
@@ -23,16 +24,24 @@ public class YoutubeController {
 	@Autowired
 	YoutubeRepository youtubeRepository;
 
-	@GetMapping("/info")
-	public String youtubecr(Model model) {
+	@GetMapping("/info.json")
+	@ResponseBody
+	public List<YoutubeVideoInfo> youtubecrjson(Model model) {
 
 		List<YoutubeVideoInfo> list = youtubeRepository.findAll();
-
-		model.addAttribute("list", list);
-
-		return "info/infolist";
+		return list;
 	}
 
+	@GetMapping("/info")
+	public String youtubecr(Model model) {
+		
+		List<YoutubeVideoInfo> list = youtubeRepository.findAll();
+		
+		model.addAttribute("list", list);
+		
+		return "info/infolist";
+	}
+	
 	@GetMapping("/{id}") // <-- id라는 명칭은 개발자가 임의로 만들어낸 명칭
 	public String infodetail(@PathVariable("id") long id, Model model) {
 		System.out.println("!@@@@@@ " + id);
@@ -42,10 +51,10 @@ public class YoutubeController {
 		System.out.println(board1);
 		model.addAttribute("YoutubeInfo", board1);
 
-		return "info/detail";
+		return "info/infodetail";
 	}
 
-	@GetMapping("/info/list")
+	@GetMapping("/info2")
 	public String pageinfo(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
 		int startPage = (page - 1) / 10 * 10 + 1;
 		int endPage = startPage + 9;
