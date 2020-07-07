@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
@@ -32,14 +35,18 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		// TODO Auto-generated method stub
 		String uid = req.getParameter("username");
 		String upw = req.getParameter("password");
+		String url = "/loginResistForm";
 		
 		loginidname = uid;
 		loginpwdname = upw;
 		
 		loginFailuerCount(uid);
 		
-		req.setAttribute(loginidname, uid);
-		req.setAttribute(loginpwdname, upw);
+//		req.setAttribute(loginidname, uid);
+//		req.setAttribute(loginpwdname, upw);
+		
+		
+		res.sendRedirect(url);
 		
 		
 //		if (exception instanceof BadCredentialsException
@@ -49,6 +56,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 //
 //			errorMessage = "account is disabled";
 //		}
+		//에러메시지 분류해서 보내기
 
 	}
 
@@ -60,6 +68,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		 if(failcount == 3) {
 			 mem.setEnable(0);
 		 }
+		 member.save(mem);
 			 
 	}
 
