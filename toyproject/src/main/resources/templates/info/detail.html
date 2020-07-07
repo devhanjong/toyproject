@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head th:replace="common/head"> 
+<style>
+tbdoy>tr:hover {
+	cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+	<nav th:replace="common/nav"></nav>
+
+	<div class="container">
+		<div class="panel-group">
+			<div class="panel panel-default">
+				<div class="panel-heading" th:text="${YoutubeVideoInfo.id}"></div>
+				<div class="panel-heading" th:text="${YoutubeVideoInfo.title}"></div>
+				<div class="panel-body" th:text="${YoutubeVideoInfo.description}"></div>
+				<div class="panel-footer" th:text="${board.AuthorMember}"></div>
+				<div><iframe th:src="'http://www.youtube.com/embed/' + ${YoutubeVideoInfo.videoId}" width="200" height="100"></iframe></div>
+			</div>
+		</div>
+	</div>
+	<div class="container text-right">
+		<button type="button" class="btn btn-default" id="list">목록</button>
+		
+	</div>
+
+
+ <footer th:replace="common/footer"></footer> 
+
+
+
+
+	<script>
+		$("#list").click(function() {
+			location = "/info/";
+			return false;
+		
+		});
+	</script>
+
+</body>
+</html>
