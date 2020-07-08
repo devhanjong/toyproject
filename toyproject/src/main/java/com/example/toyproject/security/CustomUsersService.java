@@ -58,7 +58,7 @@ public class CustomUsersService implements UserDetailsService{
 	}
 //		User user = new User(username, member.getUpw(), (Collection<? extends GrantedAuthority>) memberrole.getRoles());
 //		Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN")
-//		System.out.println(user);
+//		System.out.println(user); 
 //		
 //		 CustomSecurityUser user2 = memberRepository.findById(username)
 //				.filter(m -> m != null)

@@ -77,3 +77,4 @@ public class CustomUserDetails implements UserDetails{
 //	private Collection<? extends GrantedAuthority> authorities;  // 怨꾩젙�씠 媛�吏�怨좎엳�뒗 沅뚰븳紐⑸줉�쓣 由ы꽩�븳�떎 
 	
 }
+ 

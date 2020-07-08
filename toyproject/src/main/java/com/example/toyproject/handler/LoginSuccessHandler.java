@@ -33,9 +33,9 @@ MemberRepository MR;
 		
 		clearAuthenticationAttributes(req);
 		
-		//로그인 성공후 실패카운터 초기화 
+
+		//로그인 성공후 실패카운터 초기화  
 		Member mem = MR.findById(req.getParameter("username")).get();
-		log.error(mem.toString());
 		mem.setFailcount(0);
 		MR.save(mem);
 		
@@ -49,8 +49,8 @@ MemberRepository MR;
 				url="/admin";
 			}
 	}
-		req.getSession().setAttribute("user_info", mem);
-//		session.setAttribute("user_info", mem);
+
+		req.setAttribute("user_info", mem);
 		res.sendRedirect(url);
 		
 	}

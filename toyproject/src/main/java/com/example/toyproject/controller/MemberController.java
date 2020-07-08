@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
-import lombok.extern.java.Log;
+import lombok.extern.java.Log; 
 
 @Log
 @Controller
