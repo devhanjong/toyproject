@@ -3,19 +3,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <title>Thymeleaf3</title>
 </head>
 <body>
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<div class="alert alert-danger" role="alert">
-			
-				<h2>접근 권한이 없습니다 관리자에게 문의하세요.</h2>
-				 관리자 아이디로 <a th:href="@{/login}">로그인 </a> <br>
-				<a th:href="@{/home}"> 메인으로</a>
-				
-			</div>	
-		</div>
-	</div>
+   <body style="background-color:#f2f2f2; height:100vh;">
+      <div class="h-100 d-flex justify-content-center align-items-center">
+         <div style="height:200px; background-color:white; widows: 400px;">
+            
+               <div class="alert alert-danger d-table-cell" role="alert">
+                  
+                  <h1 class="display-5">접근 권한이 없습니다.</h1>
+                  <h1 class="display-5">관리자에게 문의하세요.</h1>
+                  <p class="lead"></p>
+                  <p class="lead">
+                     <a class="btn btn-primary btn-lg" href="/logout" role="button">관리자 아이디로 로그인</a>
+                     <a class="btn btn-primary btn-lg" href="/home" role="button">메인으로</a>
+                  </p>
+                  
+            </div>
+         </div>
+      </div>
+   </body>
 </body>
 </html>

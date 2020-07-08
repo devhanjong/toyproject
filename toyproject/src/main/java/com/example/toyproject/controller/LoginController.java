@@ -42,6 +42,12 @@ public class LoginController {
 		}
 		return "redirect:/";
 	}
+	@GetMapping("/loginResistForm/getid")
+	@ResponseBody
+	public int getid(@RequestParam("uid") String userid) { 
+		return reg_service.userIdCheck(userid);
+	}
+
 	
 	@GetMapping("/loginResistForm/idCheck")
 	@ResponseBody

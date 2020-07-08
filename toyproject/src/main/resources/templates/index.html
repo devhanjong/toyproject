@@ -77,6 +77,9 @@ http://www.tooplate.com/view/2086-multi-color
 							<li class="nav-item">
 								<a class="nav-link" href="#0" data-no="6" id="logout" sec:authorize="isAuthenticated()">로그아웃</a>
 							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#0" data-no="6" id="InfoModification" sec:authorize="isAuthenticated()">회원정보수정</a>
+							</li>
 						</ul>
 					</div>
 
@@ -702,6 +705,15 @@ http://www.tooplate.com/view/2086-multi-color
 							$(function() {
 								$("#logout").on("click", function() {
 									location.href = 'logout';
+									return false;
+								});
+							});
+							
+							/* Collapse menu after click 
+							-----------------------------------------*/
+							$(function() {
+								$("#InfoModification").on("click", function() {
+									location.href = 'memberInfoModification';
 									return false;
 								});
 							});
