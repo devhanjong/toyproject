@@ -30,7 +30,7 @@
 			<nav class="navbar">
 				<div class="tm-navbar-bg" style="display: block;">
 
-					<a class="navbar-brand text-uppercase" href="#">
+					<a class="navbar-brand text-uppercase" href="/home">
 						<i class="fa fa-gears tm-brand-icon"></i>
 						펫타그램
 					</a>
@@ -45,7 +45,7 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#0" data-no="2">자유 게시판</a>
+								<a class="nav-link" href="#0" data-no="2" id="board">자유 게시판</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#0" data-no="3">Multi Three</a>
@@ -62,6 +62,12 @@
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#0" data-no="6" id="logout" sec:authorize="isAuthenticated()">로그아웃</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#0" data-no="6" id="InfoModification" sec:authorize="isAuthenticated()">회원정보수정</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#0" data-no="6" id="adminMain" sec:authorize="isAuthenticated()">관리자페이지</a>
 							</li>
 						</ul>
 					</div>
@@ -603,8 +609,7 @@
 							
 							/* Collapse menu after click */
 							$(function() {
-								$("#logout").on("click", function() {
-									location.href = 'logout';
+								$("#signin").on("click", function() {
 									location.href = 'loginResistForm';
 									return false;
 								});
@@ -617,9 +622,34 @@
 									return false;
 								});
 							});
+							
+							/* Collapse menu after click 
+							-----------------------------------------*/
+							$(function() {
+								$("#InfoModification").on("click", function() {
+									location.href = 'memberInfoModification';
+									return false;
+								});
+							});
 
-							$('#two').hide();
-							$('#two').show();
+							/* Collapse menu after click 
+							-----------------------------------------*/
+							$(function() {
+								$("#adminMain").on("click", function() {
+									location.href = 'admin';
+									return false;
+								});
+							});
+
+							/* Collapse menu after click 
+							-----------------------------------------*/
+							$(function() {
+								$("#board").on("click", function() {
+									location.href = 'board/list';
+									return false;
+								});
+							});
+
 
 							/* Browser resized */
 							$(window)
