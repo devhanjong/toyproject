@@ -36,7 +36,7 @@ tbdoy>tr:hover {
 
 	<script>
 		$("#list").click(function() {
-			location = "/board/list";
+			location = "/board/";
 			return false;
 		});
 		
@@ -45,10 +45,6 @@ tbdoy>tr:hover {
 			return false;
 		});
 		
-		$("#update").click(function() {
-			location = "/board/update/" + [[${board.bbsId}]];
-			return false;
-		});
 		$("#delete").click(function() {
 			if(confirm("삭제하시겠습니까?")){
 			location = "/board/delete/" + [[${board.bbsId}]];

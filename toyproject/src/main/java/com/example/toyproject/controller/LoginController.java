@@ -29,12 +29,12 @@ public class LoginController {
 	@Autowired
 	private UserRegService reg_service;
 	
-	@GetMapping("/login")
+	@GetMapping("/signin")
 	public void login() { 
 		
 	}
 	
-	@PostMapping("/login")
+	@PostMapping("/signin")
 	public String signinPost(@ModelAttribute Member member) {
 		Member dbMember = memberRepository.findByUidAndUpw(member.getUid(), member.getUpw());
 		if (dbMember != null) {

@@ -41,6 +41,8 @@ public class BoardController {
 	public String boardView(Model model, @PathVariable("id") long id) {
 		Optional<Board> data = boardRepository.findById(id);
 		Board board = data.get();
+		// Board board = boardRepository.findById(id).get(); 위의 2줄을 한줄로
+		
 		System.out.println(board);
 		model.addAttribute("board", board);// k,v
 		return "board/detail";
@@ -104,8 +106,10 @@ public class BoardController {
 		/* 로그인 여부 확인 (세션의 값 확인) */
 		Member member = (Member) session.getAttribute("user_info");
 		if (member == null) { // 로그인 X
+			System.out.println(member);
 			return "0";
 		} else { // 로그인 O
+			System.out.println(member+"!@$!$");
 			String userId = member.getUid();
 			board.setAuthorMember(userId); 
 			boardRepository.save(board);
@@ -113,10 +117,7 @@ public class BoardController {
 		return "1";
 	}
 
-
-
 	
-
 	@GetMapping("/update/{id}")
 	public String boardUpdate(Model model, @PathVariable("id") long id) {
 			Optional<Board> data = boardRepository.findById(id);// jpa로 해당아이디게시물을 조회
@@ -134,7 +135,7 @@ public class BoardController {
 		Member member =  (Member) session.getAttribute("user_info");
 		if (member == null) { // 로그인 X
 			return "alert/writeAfterSign";
-		} else { // 로그인 O
+		} else { // 로그인 O	
 		String usereId = member.getUid();
 		board.setAuthorMember(usereId);
 		board.setBbsId(id);
@@ -147,11 +148,20 @@ public class BoardController {
 	public String boardDelete(@PathVariable("id") long id) {
 		// jpa로 해당 아이디 게시물을 조회해야
 		boardRepository.deleteById(id);
-		return "redirect:/board/list";
+		return "redirect:/board/";
 	}
 	
 	
+	
+	@GetMapping("/home")
+	public String home() { 
+		
+		return "index";
+	}
+	
 }
+
+
 
 
 
