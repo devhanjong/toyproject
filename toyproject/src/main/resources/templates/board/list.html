@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="common/head"> 
+ <head th:replace="/common/head"> 
 <style>
 tbody>tr:hover {
 	cursor: pointer;
@@ -9,7 +9,7 @@ tbody>tr:hover {
 </head>
 <body>
 
-	<nav th:replace="common/nav"></nav>
+	<nav th:replace="/common/nav"></nav> 
 
 	<div class="jumbotron">
 		<div class="container text-center">
@@ -53,7 +53,7 @@ tbody>tr:hover {
 		</div>
 	</div>
 
-	<!--  <footer th:replace="common/footer"> </footer>   -->
+   <footer th:replace="/common/footer"> </footer>   
 
 	
 
@@ -70,14 +70,3 @@ tbody>tr:hover {
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

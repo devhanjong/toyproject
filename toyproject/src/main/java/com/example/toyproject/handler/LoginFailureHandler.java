@@ -17,7 +17,7 @@ import com.example.toyproject.exception.AccountNotFoundException;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
-import lombok.Data;
+import lombok.Data; 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -46,7 +46,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		
 		if(member.findById(uid).isPresent())loginFailuerCount(uid); 
 		if(exception.getMessage().equals("Bad credentials")) {
-			errorMsg="아이디 또는 비밀번호가 맞지 않습니다.";
+			errorMsg="아이디 또는 비밀번호가 맞지 않습니다."; 
 		}
 		
 		loginidname = uid;

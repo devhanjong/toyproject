@@ -1,35 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
-<!-- <head th:replace="common/head"> -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head"> 
 </head>
 
 <body>
-	<!--<nav th:replace="common/nav"></nav> -->
+	<nav th:replace="common/nav"></nav> 
 
 	<div class="jumbotron">
 		<div class="container text-center">
 			<form method="post" th:action="@{/board/update/} + ${board.bbsId}">
 				<div class="form-group">
 					<label for="title">Title:</label>
-					<input type="text" class="form-control" name="title" id="title" th:value="${board.bbsTitle}">
+					<input type="text" class="form-control" name="bbsTitle" id="title" th:value="${board.bbsTitle}">
 				</div>
 				<div class="form-group">
 					<label for="content">Content:</label>
-					<textarea class="form-control" rows="5" name="content" id="content">
-					[[${board.bbsContent}]]</textarea>
+					<textarea class="form-control" rows="5" name="bbsContent" id="content">[[${board.bbsContent}]]</textarea>
 				</div>
 				<button type="submit" id="complete" class="btn btn-primary btn-block">글수정</button>
 			</form>
 		</div>
 	</div>
 
-	<!--<footer class="container-fluid text-center" th:replace="common/footer"> </footer>-->
+	<footer class="container-fluid text-center" th:replace="common/footer"> </footer>
 
 	<script>
-		$("#complete").click(function() {
-			$("form").submit();
-			return false;
-		});
+ 		$("#complete").click(function() {
+ 			$("form").submit();
+ 			return false;
+ 		});
 	</script>
 
 </body>

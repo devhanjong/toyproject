@@ -24,6 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginSuccessHandler implements AuthenticationSuccessHandler { 
 @Autowired
 MemberRepository MR;
+
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res,
@@ -32,6 +33,7 @@ MemberRepository MR;
 		
 		clearAuthenticationAttributes(req);
 		
+
 		//로그인 성공후 실패카운터 초기화  
 		Member mem = MR.findById(req.getParameter("username")).get();
 		mem.setFailcount(0);
@@ -47,6 +49,7 @@ MemberRepository MR;
 				url="/admin";
 			}
 	}
+
 		req.setAttribute("user_info", mem);
 		res.sendRedirect(url);
 		

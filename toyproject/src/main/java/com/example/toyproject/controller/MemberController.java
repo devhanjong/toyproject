@@ -1,8 +1,11 @@
 package com.example.toyproject.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
-import lombok.extern.java.Log;
+import lombok.extern.java.Log; 
 
 @Log
 @Controller
@@ -28,6 +31,16 @@ public class MemberController {
 	public void signup() {
 		
 	}
+	
+	@RequestMapping("/memberInfoModification")
+	public void memberInfoModification() {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		System.out.println(auth.getName());
+		
+		
+	}
+	
+	
 	@Transactional
 	@PostMapping("/resistResult")
 	public String SignupPost(@ModelAttribute("member") Member member) {

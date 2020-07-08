@@ -3,6 +3,7 @@ package com.example.toyproject.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,11 @@ public class BoardController {
 	BoardRepository boardRepository;
 	@Autowired
 	HttpSession session;   
-	@RequestMapping("/board") // 하나의 주소로 만들어주는거 /board랑 /write합쳐서 => /board/write로 주소가 지정된다	
 	
+	@Autowired
+	HttpServletRequest HSR;
 	
-	
-	
-
+	@RequestMapping("/board")
 	@GetMapping("/{id}")
 	public String boardView(Model model, @PathVariable("id") long id) {
 		Optional<Board> data = boardRepository.findById(id);
@@ -47,7 +47,7 @@ public class BoardController {
 	}
 	
 	// 뭘 수정할지 조회해야
-	@GetMapping("/{id}") // <-- id라는 명칭은 개발자가 임의로 만들어낸 명칭 localhost:8080/board/20
+	@GetMapping("/{id}") 
 	public String boardDetail(Model model, @PathVariable("id") long id) {
 		System.out.println("확인!@@@" + id);
 		// jpa로 해당 아이디 게시물을 조회해야
@@ -58,24 +58,19 @@ public class BoardController {
 		return "board/detail";
 	}
 
-	@GetMapping("/delete/{id}")
-	public String boardDelete(@PathVariable("id") long id) {
-		// jpa로 해당 아이디 게시물을 조회해야
-		boardRepository.deleteById(id);
-		return "redirect:/board/";
-	}
+
 
 	
 	
 	
 
 
-	@GetMapping("/list") 
+	@GetMapping("/") 
 	public String board(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
 		int startPage = (page - 1) / 10 * 10 + 1;
 		int endPage = startPage + 9;
 		
-		PageRequest req = PageRequest.of(page - 1, 10, Sort.by(Direction.DESC, "id")); // 0페이지부터
+		PageRequest req = PageRequest.of(page - 1, 10, Sort.by(Direction.DESC, "bbsId")); // 0페이지부터
 		// 주소창에 http://localhost:8080/board/?page=10 확인
 
 		Page<Board> result = boardRepository.findAll(req);
@@ -89,6 +84,7 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("page", page);
+		System.out.println(startPage +"@@"+endPage+"@@"+totalPage+"@@"+page);
 		return "board/list";
 	}
 
@@ -99,10 +95,12 @@ public class BoardController {
 	public String boardWrite() {
 		return "/board/write";
 	}
-	@PostMapping("/write") 
+	
+	@RequestMapping("/write") 
 	@ResponseBody
+	//@ResponseBody가 없을시에는 모든 자료형으로 리턴이 가능
 	public String boardWritePost(@ModelAttribute Board board) {
-		System.out.println(board);
+		System.out.println("@#$@#$@#"+board);
 		/* 로그인 여부 확인 (세션의 값 확인) */
 		Member member = (Member) session.getAttribute("user_info");
 		if (member == null) { // 로그인 X
@@ -121,22 +119,38 @@ public class BoardController {
 
 	@GetMapping("/update/{id}")
 	public String boardUpdate(Model model, @PathVariable("id") long id) {
-		// jpa로 해당 아이디 게시물을 조회해야
-		Optional<Board> data = boardRepository.findById(id);
+			Optional<Board> data = boardRepository.findById(id);// jpa로 해당아이디게시물을 조회
 		Board board = data.get();
+//		System.out.println(board);
 		model.addAttribute("board", board);
 		return "board/update";
 	}
 	
 	@PostMapping("/update/{id}")
-	public String boaStringrdUpdatePost(@ModelAttribute Board board, @PathVariable("id") long id) {
-		Member member = (Member) session.getAttribute("user_info");
-		String memberId = member.getUid();
-		board.setAuthorMember(memberId);;
+	public String boardUpdatePost(HttpServletRequest HSR, @ModelAttribute Board board, @PathVariable("id") long id) {
+//		 member = HSR.getSession().getServletContext();
+//		System.out.println(member);
+		/* 로그인 여부 확인 (세션의 값 확인) */
+		Member member =  (Member) session.getAttribute("user_info");
+		if (member == null) { // 로그인 X
+			return "alert/writeAfterSign";
+		} else { // 로그인 O
+		String usereId = member.getUid();
+		board.setAuthorMember(usereId);
 		board.setBbsId(id);
 		boardRepository.save(board);
+		}
 		return "redirect:/board/" + id;
 	}
+	
+	@GetMapping("/delete/{id}")
+	public String boardDelete(@PathVariable("id") long id) {
+		// jpa로 해당 아이디 게시물을 조회해야
+		boardRepository.deleteById(id);
+		return "redirect:/board/list";
+	}
+	
+	
 }
 
 
