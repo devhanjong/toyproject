@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head">
+<style>
+tbody>tr:hover {
+	cursor: pointer;
+	.
+	thumbnail-wrappper
+	{
+	width
+	:
+	25%;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.thumbnail {
+	position: relative;
+	padding-top: 100%; /* 1:1 ratio */
+	overflow: hidden;
+}
+
+.thumbnail .centered {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	-webkit-transform: translate(20%, 80%);
+	-ms-transform: translate(20%, 80%);
+	transform: translate(20%, 80%);
+}
+
+.thumbnail .centered img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-width: 100%;
+	height: auto;
+	-webkit-transform: translate(20%, 80%);
+	-ms-transform: translate(20%, 80%);
+	transform: translate(20%, 80%);
+}
+}
+</style>
+</head>
+<body>
+
+	<nav th:replace="common/nav"></nav>
+
+	<div class="jumbotron">
+		<div class="container text-center">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성자</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="YoutubeVideoInfo : ${list}" th:attr="id=${YoutubeVideoInfo.id}">
+						<td th:text="${YoutubeVideoInfo.id}"></td>
+						<td th:text="${YoutubeVideoInfo.description}"></td>
+
+						<td th:text="${YoutubeVideoInfo.title}"></td>
+						<td><iframe th:src="${YoutubeVideoInfo.thumbnailUrl}" width="150" height="100" allow="fullscreen" frameborder="0"></iframe>
+						</td>
+						<td>
+							<iframe th:src="'http://www.youtube.com/embed/' + ${YoutubeVideoInfo.videoId}" width="200" height="100"></iframe>
+						</td>
+						<!-- 						<div class="thumbnail-wrapper"> -->
+						<!-- 							<div class="thumbnail"> -->
+						<!-- 								<div class="centered"> -->
+						<!-- 									<img th:src="${YoutubeVideoInfo.thumbnailUrl}"width="200" height="100"> -->
+						<!-- 								</div> -->
+						<!-- 							</div> -->
+						<!-- 						</div> -->
+					</tr>
+				</tbody>
+			</table>
+			<nav aria-label="...">
+				<ul class="pagination">
+					<li class="page-item disabled">
+						<span class="page-link">Previous</span>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">1</a>
+					</li>
+					<li class="page-item active">
+						<span class="page-link">
+							2
+							<span class="sr-only">(current)</span>
+						</span>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">Next</a>
+					</li>
+				</ul>
+			</nav>
+			<ul class="pagination">
+				<!-- 이전 페이지 넘어가기 버튼 추가 -->
+				<li>
+					<a th:if="${startPage} > 1" th:href="@{/YoutubeInfo/(page=${startPage} - 10)}">&lt;</a>
+				</li>
+				<th:block th:each="pageNumber : ${#numbers.sequence(startPage1, endPage)}">
+					<li th:class="${page == pageNumber} ? active">
+						<!-- class="active" 현재 페이지 일때 -->
+						<a th:href="@{/YoutubeInfo/(page=${pageNumber})}" th:text="${pageNumber}"></a>
+					</li>
+				</th:block>
+				<!-- 다음 페이지 넘어가기 버튼 추가 -->
+				<li>
+					<a th:if="${totalPage} > ${endPage}" th:href="@{/YoutubeInfo/(page=${startPage} + 10)}">&gt;</a>
+				</li>
+			</ul>
+
+
+		</div>
+	</div>
+
+	<!--  <footer th:replace="common/footer"> </footer>   -->
+
+
+
+	<script>
+		$("tbody > tr").click(function() {
+			var id = $(this).attr("id");
+			// 			var id = jQuery(this).attr("id");
+			location = "/info/" + "id";
+		});
+	</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

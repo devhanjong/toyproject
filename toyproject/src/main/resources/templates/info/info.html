@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+
+</style>
 </head>
 <body>
 	<table border="1">
@@ -12,26 +15,25 @@
 			<td>내용</td>
 
 		</tr>
-		
-		<tr th:each="YoutubeVideoInfo : ${list[5]}">
+
+		<tr th:each="YoutubeVideoInfo : ${list}"th:attr="id=${YoutubeVideoInfo.id}">
 			<td th:text="${YoutubeVideoInfo.id}"></td>
 			<td th:text="${YoutubeVideoInfo.description}"></td>
 			<td th:text="${YoutubeVideoInfo.videoId}"></td>
-			
+			<td th:text="${YoutubeVideoInfo.thumbnailUrl}"></td>
 			<td th:text="${YoutubeVideoInfo.title}"></td>
-		<!-- 	<img src=${thumbnails}></img>
-		 -->
-			
-			<iframe src="http://www.youtube.com/embed/" + "${YoutubeVideoInfo.videoId}" width="400" height="300"></iframe>
-			
+			<iframe th:src="${YoutubeVideoInfo.thumbnailUrl}" width="200" height="100"></iframe>
+			<iframe th:src="'http://www.youtube.com/embed/' + ${YoutubeVideoInfo.videoId}" width="1000" height="500"></iframe>
+
 		</tr>
 	</table>
-	<hr>
-	<th:block th:each="pageNumber : ${#numbers.sequence(1, 10)}">
+	<hr><th:block th:each="pageNumber : ${#numbers.sequence(1, 10)}">
 		<span th:text="${pageNumber}"></span>
 	</th:block>
-	<script>
 	
+	<script>
+		
 	</script>
 </body>
 </html>
+

@@ -23,15 +23,10 @@ public class Member {
 	
 	@Id
 	private String uid;  //�쑀���븘�씠�뵒
-	
 	private String upw;  //�쑀�� 鍮꾨�踰덊샇
-	
 	private String uname;  //�쑀���씠由� 
-	
 	private String uemail;
-	
 	private int Enable;  //if 0 == disable ,, 1 = Enable
-	
 	private int failcount;
 	
 	

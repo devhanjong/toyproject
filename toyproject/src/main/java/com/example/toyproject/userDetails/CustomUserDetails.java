@@ -26,8 +26,7 @@ public class CustomUserDetails implements UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		
-		System.out.println("!!!!!" );
+
 		
 		return new CustomSecurityUser(member).getAuthorities();
 	}

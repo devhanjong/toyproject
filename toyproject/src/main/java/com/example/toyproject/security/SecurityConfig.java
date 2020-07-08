@@ -8,8 +8,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.example.toyproject.handler.LoginFailureHandler;
 import com.example.toyproject.handler.LoginSuccessHandler;
 
 import lombok.extern.java.Log;
@@ -37,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		.formLogin()
 		.loginPage("/loginResistForm")
 		.successHandler(authenticationSuccessHandler())
-//		.failureHandler(authenticationFailureHandler())
+		.failureHandler(authenticationFailureHandler())
 		.permitAll()
 		.and()
 		.logout()
@@ -51,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		 http.sessionManagement()
 		   .maximumSessions(1) 
 		   .maxSessionsPreventsLogin(true)
-		   .expiredUrl("/login");
+		   .expiredUrl("/loginResistForm");
 		   
 		 
 		
@@ -81,19 +83,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		return successHandler;
 	}
-}
+
 	
 
 /*
  * FailureHandler bean register
  */
-//@Bean
-//public AuthenticationFailureHandler authenticationFailureHandler() {
-//    LoginFailureHandler failureHandler = new LoginFailureHandler();
-//    failureHandler.setDefaultFailureUrl("/loginResistForm");
-//    return failureHandler;
-//}
-//	
+	@Bean
+	public AuthenticationFailureHandler authenticationFailureHandler() {
+		LoginFailureHandler failureHandler = new LoginFailureHandler();
+		failureHandler.setDefaultFailureUrl("history.back()");
+		return failureHandler;
+	}
+}
+	
 //	
 //}
 	

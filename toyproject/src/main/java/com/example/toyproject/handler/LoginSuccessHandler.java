@@ -15,23 +15,33 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.WebAttributes;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class LoginSuccessHandler implements AuthenticationSuccessHandler { 
 @Autowired
 MemberRepository MR;
+
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res,
 			Authentication authentication) throws IOException, ServletException {
-		clearAuthenticationAttributes(req);
-		MR.findById(req.getParameter("username")).get().setFailcount(0);
+		log.error("enabled");
 		
+		clearAuthenticationAttributes(req);
+		
+		//로그인 성공후 실패카운터 초기화 
+		Member mem = MR.findById(req.getParameter("username")).get();
+		log.error(mem.toString());
+		mem.setFailcount(0);
+		MR.save(mem);
 		
 		Collection<? extends GrantedAuthority> list = authentication.getAuthorities();
 		Iterator<? extends GrantedAuthority> authlist = list.iterator();
 		String url ="/home";
-		
 		
 		while(authlist.hasNext()) {
 			GrantedAuthority authority = authlist.next();
@@ -39,7 +49,8 @@ MemberRepository MR;
 				url="/admin";
 			}
 	}
-		req.getSession().setAttribute("msg", "관리자페이지");
+		req.getSession().setAttribute("user_info", mem);
+//		session.setAttribute("user_info", mem);
 		res.sendRedirect(url);
 		
 	}

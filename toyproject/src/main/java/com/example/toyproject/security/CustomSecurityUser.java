@@ -21,14 +21,13 @@ public class CustomSecurityUser extends User{
 	private Member member;
 	
 	public CustomSecurityUser(Member member) {
-		
 		super(member.getUid(), 
 				member.getUpw(), makeGrantedAuthority(member.getRoles()));
 		this.member = member;
 	}
 	
 	private static List<GrantedAuthority> makeGrantedAuthority(List<MemberRole> roles){
-		
+
 		List<GrantedAuthority> list = new ArrayList<>();
 		
 		roles.forEach(
