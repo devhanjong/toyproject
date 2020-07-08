@@ -29,12 +29,12 @@ public class LoginController {
 	@Autowired
 	private UserRegService reg_service;
 	
-	@GetMapping("/signin")
+	@GetMapping("/login")
 	public void login() { 
 		
 	}
 	
-	@PostMapping("/signin")
+	@PostMapping("/login")
 	public String signinPost(@ModelAttribute Member member) {
 		Member dbMember = memberRepository.findByUidAndUpw(member.getUid(), member.getUpw());
 		if (dbMember != null) {
@@ -42,6 +42,12 @@ public class LoginController {
 		}
 		return "redirect:/";
 	}
+	@GetMapping("/loginResistForm/getid")
+	@ResponseBody
+	public int getid(@RequestParam("uid") String userid) { 
+		return reg_service.userIdCheck(userid);
+	}
+
 	
 	@GetMapping("/loginResistForm/idCheck")
 	@ResponseBody
