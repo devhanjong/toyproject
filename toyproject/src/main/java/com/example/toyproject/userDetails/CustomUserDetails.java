@@ -42,7 +42,7 @@ public class CustomUserDetails implements UserDetails{
 		// TODO Auto-generated method stub
 		return member.getUid();
 	}
-
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub

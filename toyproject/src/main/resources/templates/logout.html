@@ -11,11 +11,9 @@
     </script>
 	
 	<form method="post">
-		<h3>Logout</h3>
 		<input type="hidden" th:name="${_csrf.parameterName}"
 							 th:value="${_csrf.token}"/>
 		<button type="submit" class="btn">LogOut</button>		
-		<p><sec:authentication property="principal.username"/>ㅎ</p>
 
 	</form>
 

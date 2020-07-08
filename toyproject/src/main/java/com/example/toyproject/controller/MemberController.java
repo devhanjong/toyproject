@@ -1,16 +1,14 @@
 package com.example.toyproject.controller;
 
-import java.util.Enumeration;
-
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
-import org.openqa.selenium.remote.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,32 +36,29 @@ public class MemberController {
 		
 	}
 
-	@RequestMapping("/alert/infoModificationResult")
-	public void infoModificationResult() {
-		
-	}
 	
 	
-	@RequestMapping("/memberInfoModification")
+	@GetMapping("/memberInfoModification")
 	public void memberInfoModification() {
-//		Enumeration<String> en = session.getAttributeNames();
-//		while(en.hasMoreElements()) {
-//			String sName = en.nextElement();
-//			System.out.printf("[%s] / %s\n", sName, session.getAttribute(sName));
-//		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(auth.getName());
-		System.out.println(auth.getPrincipal());
-		
-		session.setAttribute("userid", auth.getName());
-//		HttpResponse HR = new HttpResponse();
-//		HR.setAttribute("userid", auth.getName());
 		
 		
 	}
 	
+	@PostMapping("/memberInfoModification")
+	public String memberInfoModification(@ModelAttribute("member") Member member) {
+		String encryptPw = passwordeEncoder.encode(member.getUpw()); 
+		
+		member.setUpw(encryptPw);
+		member.setEnable(1);
+		member.setFailcount(0);
+		
+		memberRepository.save(member);
+		
+		return "/alert/infoModificationResult";
+	}
+
 	
-	@Transactional
+	
 	@PostMapping("/resistResult")
 	public String SignupPost(@ModelAttribute("member") Member member) {
 		//회원가입시 결과화면 

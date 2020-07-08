@@ -1,8 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
 xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
-	<input type="text" th:value="${msg}" readonly />
-	<p>[[${msg}]]</p>
 
 <div sec:authorize="isAuthenticated()">
   This content is only shown to authenticated users.
