@@ -17,7 +17,7 @@ import com.example.toyproject.exception.AccountNotFoundException;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.MemberRepository;
 
-import lombok.Data;
+import lombok.Data; 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -36,17 +36,17 @@ tbdoy>tr:hover {
 
 	<script>
 		$("#list").click(function() {
-			location = "/board/";
+			location = "/board/list";
+			return false;
+		});
+		
+		$("#update").click(function() {
+			location = "/board/update/" + [[${board.bbsId}]]; 
 			return false;
 		});
 		
 		$("#update").click(function() {
 			location = "/board/update/" + [[${board.bbsId}]];
-			return false;
-		});
-		
-		$("#update").click(function() {
-			location = "/board/delete/" + [[${board.bbsId}]];
 			return false;
 		});
 		$("#delete").click(function() {

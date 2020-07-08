@@ -28,15 +28,15 @@
 		
 			<ul class="nav navbar-nav navbar-right">
 				<li th:if="${session.user_info} == null"> 
-					<a href="/signin">
+					<a href="/loginResistForm">
 						<span class="glyphicon glyphicon-log-in"></span>
 						Sign in
 					</a>
 				</li>
-				<li th:unless="${session.user_info} == null"> <!-- 해당조건이 아니면  -->
-					<a href="/signout">
+				<li th:unless="${session.user_info} == null"> <!--null이 아니면(unless) -->
+					<a href="/logout">
 						<span class="glyphicon glyphicon-log-out"></span>
-						Sign out [[${session.user_info.name} + '님 반갑습니다.']]
+						Sign out [[${session.user_info.uname} + '님 반갑습니다.']]
 					</a>
 				</li>
 			</ul>
