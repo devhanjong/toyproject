@@ -1,8 +1,11 @@
 package com.example.toyproject.controller;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
+import org.openqa.selenium.remote.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,15 +30,34 @@ public class MemberController {
 	@Autowired
 	MemberRepository memberRepository;
 	
+	@Autowired
+	HttpSession session;
+	
 	@RequestMapping("/loginResistForm")
 	public void signup() {
 		
 	}
+
+	@RequestMapping("/alert/infoModificationResult")
+	public void infoModificationResult() {
+		
+	}
+	
 	
 	@RequestMapping("/memberInfoModification")
 	public void memberInfoModification() {
+//		Enumeration<String> en = session.getAttributeNames();
+//		while(en.hasMoreElements()) {
+//			String sName = en.nextElement();
+//			System.out.printf("[%s] / %s\n", sName, session.getAttribute(sName));
+//		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		System.out.println(auth.getName());
+		System.out.println(auth.getPrincipal());
+		
+		session.setAttribute("userid", auth.getName());
+//		HttpResponse HR = new HttpResponse();
+//		HR.setAttribute("userid", auth.getName());
 		
 		
 	}
