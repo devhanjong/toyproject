@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.toyproject.model.Board;
+import com.example.toyproject.model.FileInfo;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.BoardRepository;
 

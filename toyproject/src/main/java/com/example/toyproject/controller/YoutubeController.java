@@ -1,8 +1,10 @@
 package com.example.toyproject.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
- 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,11 +57,12 @@ public class YoutubeController {
 	}
 
 	@GetMapping("/info2")
-	public String pageinfo(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
+	@ResponseBody
+	public Map<String, Object> pageinfo(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
 		int startPage = (page - 1) / 10 * 10 + 1;
 		int endPage = startPage + 9;
 		
-		PageRequest req = PageRequest.of(page - 1, 10, Sort.by(Direction.DESC, "id")); // 0페이지부터
+		PageRequest req = PageRequest.of(page - 1, 12, Sort.by(Direction.DESC, "id")); // 0페이지부터
 		// 주소창에 http://localhost:8080/board/?page=10 확인
 
 		Page<YoutubeVideoInfo> result = youtubeRepository.findAll(req);
@@ -67,13 +70,15 @@ public class YoutubeController {
 		if (endPage > totalPage) {
 			endPage = totalPage;
 		}
+		
+		Map<String, Object> map = new HashMap<>();
 		List<YoutubeVideoInfo> list = result.getContent();
-		model.addAttribute("list", list);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("endPage", endPage);
-		model.addAttribute("totalPage", totalPage);
-		model.addAttribute("page", page);
-		return "info/infolist";
+		map.put("list", list);
+		map.put("totalPage", totalPage);
+		map.put("nowPage", page);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		return map;
 	}
 
 }

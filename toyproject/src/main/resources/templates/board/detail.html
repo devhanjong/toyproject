@@ -43,6 +43,9 @@ tbdoy>tr:hover {
 					<br>
 					<dt>내용</dt>
 					<dd>[[${board.bbsContent}]]</dd>
+					<br>
+					<dt>첨부이미지</dt>
+					<div class="panel-footer" th:text="${board.sFileURL}"></div>
 				</dl>
 			</form>
 			<div class="btn-group btn-group-sm" role="group" style="float: right;">
@@ -50,6 +53,7 @@ tbdoy>tr:hover {
 				<button th:if="${session.userid}==${board.member.uid}" type="button" class="btn btn-default" id="update">수정</button>
 				<button th:if="${session.userid}==${board.member.uid}" type="button" class="btn btn-default" id="delete">삭제</button>
 				<button type="button" class="btn btn-default" sec:authorize="hasRole('ROLE_ADMIN')" id="admindelete">삭제</button>
+				
 			</div>
 		</div>
 

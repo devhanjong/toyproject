@@ -30,9 +30,6 @@ public class MemberTest {
 	@Autowired
 	private BoardRepository br;
 	
-	 @Autowired
-    CommentRepository cr;
-	 
 	@Autowired
 	PasswordEncoder pe;
 
@@ -64,7 +61,6 @@ public class MemberTest {
 	public void testInsert2() {
 		Member mem = mr.findById("user31").get();
 		for (int i = 0; i <= 100; i++) {
-			
 			Board board = new Board();
 			board.setBbsId(i);
 			board.setBbsTitle("title" + i);
