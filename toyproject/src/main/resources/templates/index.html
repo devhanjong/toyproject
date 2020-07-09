@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 
 <title>펫타그램</title>
 
@@ -15,7 +13,6 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/hero-slider-style.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
-<!-- Magnific popup style (http://dimsemenov.com/plugins/magnific-popup/) -->
 <link rel="stylesheet" href="css/tooplate-style.css">
 
 </head>
@@ -32,7 +29,7 @@
 
 					<a class="navbar-brand text-uppercase" href="/home">
 						<i class="fa fa-gears tm-brand-icon"></i>
-						펫타그램
+						Petagrem
 					</a>
 
 					<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#tmNavbar">&#9776;</button>
@@ -45,10 +42,10 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#0" data-no="2" id="board">자유 게시판</a>
+								<a class="nav-link" href="#0" data-no="2" id="board">Petmunity</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#0" data-no="3">Multi Three</a>
+								<a class="nav-link" href="#0" data-no="3">Petube</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#0" data-no="4">Our Team</a>
@@ -56,13 +53,9 @@
 							<li class="nav-item">
 								<a class="nav-link" href="#0" data-no="5" id="signin2">Keep in touch</a>
 							</li>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#0" data-no="6" id="signin" sec:authorize="!isAuthenticated()">로그인</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#0" data-no="6" id="logout" sec:authorize="isAuthenticated()">로그아웃</a>
-							</li>
+							
+							
+							
 							<li class="nav-item">
 								<a class="nav-link" href="#0" data-no="6" id="InfoModification" sec:authorize="isAuthenticated()">회원정보수정</a>
 							</li>
@@ -75,7 +68,10 @@
 					<div class="collapse navbar-toggleable-md text-xs-center text-uppercase tm-navbar" id="tmNavbar">
 						<ul class="nav navbar-nav">
 							<li class="nav-item">
-								<a style="top: -25px" class="nav-Link" href="#0" data-no="7">login</a>
+								<a style="top: -25px" class="nav-Link" href="#0" data-no="7"id="signin" sec:authorize="!isAuthenticated()">login/Signup</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#0" data-no="6" id="logout" sec:authorize="isAuthenticated()">logout</a>
 							</li>
 
 						</ul>
@@ -289,17 +285,18 @@
 
 			<!-- Page 3 Gallery Three -->
 			<li>
-				<div class="cd-full-width">
+				<div class="cd-full-width" id="full-three">
 					<div class="container-fluid js-tm-page-content" data-page-no="3" data-page-type="gallery">
 						<div class="tm-img-gallery-container">
 							<div class="tm-img-gallery gallery-three">
 								<div class="tm-img-gallery-info-container" id="three">
 									<h2 class="tm-text-title tm-gallery-title">
-										<span class="tm-white">Third Multi Gallery</span>
+										<span class="tm-white">pet's info</span>
 									</h2>
 									<p class="tm-text">
-										<span class="tm-white">Donec dapibus dui sed nisi fermentum, a sollicitudin lorem fringilla. Integer nec pharetra turpis, eu sagittis ipsum. Cras dignissim lacus dolor.</span>
+										<span class="tm-white">Latest pet related videos</span>
 									</p>
+
 								</div>
 							</div>
 						</div>
@@ -315,9 +312,13 @@
 							<div class="col-xs-12">
 								<div class="tm-flex">
 									<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-textbox-padding">
-										<h2 class="tm-text-title">About our team</h2>
-										<p class="tm-text">Quisque efficitur dui id turpis cursus, quis faucibus nulla malesuada. Nulla consectetur eget quam id pulvinar. Nulla facilisi. Curabitur rhoncus lacinia tincidunt.
-											Etiam velit dui, rutrum vel finibus ac, commodo at mauris. Donec vitae diam ac tellus consectetur interdum eu non odio.</p>
+										<h2 class="tm-text-title">Team Petagrem!!</h2>
+										<p class="tm-text"><strong> 
+											반려동물이라는 주제로 사람들의 의사와 정보를 주고 받을수 있는 곳.
+											<br>
+											지난 한달간의 배움을 실제로 구현해 보는 우리만의 미니프로젝트!!
+											</strong>
+										</p>
 									</div>
 								</div>
 							</div>
@@ -325,43 +326,16 @@
 
 						<div class="row tm-white-box-margin-b">
 							<div class="col-xs-12">
-								<div class="tm-flex">
-									<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding">
-										<h2 class="tm-text-title">Nulla vitae magna</h2>
-										<p class="tm-text">Aliquam porttitor tortor at nisi fermentum, ac porta arcu vulputate. Nunc lobortis ipsum sapien, non ultrices odio tempus varius. In posuere dolor non sagittis
-											ultrices.</p>
-									</div>
-									<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding">
-										<h2 class="tm-text-title">Vivamus aliquam turpis</h2>
-										<p class="tm-text">Integer quis leo pretium, cursus nisl non, placerat magna. Sed efficitur massa id magna eleifend tristique. Duis vitae turpis dapibus, facilisis magna ut, pretium
-											metus.</p>
-									</div>
-								</div>
+								<div class="tm-flex"></div>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-xs-12">
-								<div class="tm-flex">
-									<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding">
-										<h2 class="tm-text-title">Curabitur at sem</h2>
-										<p class="tm-text">Curabitur ac bibendum augue, a convallis mi. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed ultrices placerat arcu.</p>
-									</div>
-									<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding">
-										<h2 class="tm-text-title">Aliquam laoreet velit</h2>
-										<p class="tm-text">Proin sagittis mauris dolor, vel efficitur lectus dictum nec. Sed ultrices placerat arcu, id malesuada metus cursus suscipit. Donex quis consectetur ligula. Thank you.</p>
-									</div>
-									<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding">
-										<h2 class="tm-text-title">Suspendisse facilisis</h2>
-										<p class="tm-text">Sed ultrices placerat arcu, id malesuada metus cursus suscipit. Donex quis consectetur ligula. Proin accumsan eros id nisi porttitor, a facilisis quam cursus.</p>
-									</div>
-								</div>
+								<div class="tm-flex"></div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<!-- .cd-full-width -->
-
 			</li>
 
 			<!-- Page 5 Contact Us -->
@@ -399,7 +373,6 @@
 
 										<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-2-col-textbox-2 tm-textbox-padding tm-textbox-padding-contact">
 											<h2 class="tm-contact-info">794 Old Street 12120, San Francisco, CA</h2>
-											<!-- google map goes here -->
 											<div id="google-map"></div>
 										</div>
 
@@ -414,29 +387,22 @@
 					</div>
 
 				</div>
-				<!-- .cd-full-width -->
 			</li>
 		</ul>
-		<!-- .cd-hero-slider -->
 
-		<footer class="tm-footer">
+		<footer class="tm-footer" style="padding-top: 0;">
 
 			<div class="tm-social-icons-container text-xs-center">
-				<a href="#" class="tm-social-link">
+				<a href="http://www.facebook.com" class="tm-social-link">
 					<i class="fa fa-facebook"></i>
 				</a>
-				<a href="#" class="tm-social-link">
+				<a href="http://www.google.com" class="tm-social-link">
 					<i class="fa fa-google-plus"></i>
 				</a>
-				<a href="#" class="tm-social-link">
+				<a href="http://www.twitter.com" class="tm-social-link">
 					<i class="fa fa-twitter"></i>
 				</a>
-				<a href="#" class="tm-social-link">
-					<i class="fa fa-behance"></i>
-				</a>
-				<a href="#" class="tm-social-link">
-					<i class="fa fa-linkedin"></i>
-				</a>
+
 			</div>
 
 			<p class="tm-copyright-text">Copyright &copy; 2017 Your Company - Design: Tooplate</p>
@@ -445,20 +411,41 @@
 
 	</div>
 
+	<div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalCenterTitle">
+		<div class="modal-dialog modal-fullsize" role="document">
+			<div class="modal-dialog  modal-lg modal-center modal-fullsize" style="width: 1000; margin: auto; height: 100%;" role="document">
+				<div class="modal-content modal-fullsize">
 
-	<div id="loader-wrapper">
-		<div id="loader"></div>
-		<div class="loader-section section-left"></div>
-		<div class="loader-section section-right"></div>
-	</div>
 
-	<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
-	<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/hero-slider-main.js"></script>
-	<script src="js/jquery.magnific-popup.min.js"></script>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Pet's Info</h4>
+						</div>
+						<div class="modal-body">
+							<iframe id="player" type="text/html" width="100%" height="700" src="http://www.youtube.com/embed/M7lc1UVf-VE" frameborder="0"></iframe>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
 
-	<script>
+				</div>
+			</div>
+
+			<div id="loader-wrapper">
+				<div id="loader"></div>
+				<div class="loader-section section-left"></div>
+				<div class="loader-section section-right"></div>
+			</div>
+
+			<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+			<script src="https://www.atlasestateagents.co.uk/javascript/tether.min.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/hero-slider-main.js"></script>
+			<script src="js/jquery.magnific-popup.min.js"></script>
+
+			<script>
 		function adjustHeightOfPage(pageNo) {
 
 			var offset = 80;
@@ -514,32 +501,6 @@
 								}
 							});
 
-							/* Gallery Two pop up
-							-----------------------------------------*/
-							// 1번 카드뷰 디자인을 직접해서 클릭시 보이도록 수정
-							// 							$('.gallery-two a').click(function() {
-							// 								var img_name = $(this).attr("href");
-							// 								var html = `<div class="card" style="width:500px">\
-							// 									  <img class="card-img-top" src="${img_name}" alt="Card image">\
-							// 									  <div class="card-img-overlay">\
-							// 									    <h4 class="card-title">John Doe</h4>\
-							// 									    <p class="card-text">Some example text.</p>\
-							// 									    <a href="#" class="btn btn-primary">See Profile</a>\
-							// 									  </div>\
-							// 									</div>`;
-							// 								$('body').append(html);
-							// 								return false;
-							// 							});
-							// 2번 magnificPopup 라이브러리를 분석해서 원하는 모습으로 보이도록
-							// 2-1번 이미지 + 글자 모습 지원 여부 확인 <== 지원이 된다면 가장 쉬운 방법
-							// 2-2번 이미지를 만드는 자바스크립트를 코드를 찾아서 원하는 모습으로 수정
-							// 							$('.gallery-two').magnificPopup({
-							// 								delegate : 'a',
-							// 								type : 'image',
-							// 								gallery : {
-							// 									enabled : true
-							// 								}
-							// 							});
 							/* Gallery Three pop up*/
 // 							$('.gallery-three').magnificPopup({
 // 								delegate : 'a',
@@ -548,65 +509,14 @@
 // 									enabled : true
 // 								}
 // 							});
-							/* Gallery Three pop up*/
-// 							$('.gallery-three').magnificPopup({
-// 								delegate : 'a',
-// 								type : 'image',
-// 								gallery : {
-// 									enabled : true
-// 								}
-// 							});
-							/* Gallery Three pop up*/
-// 							$('.gallery-three').magnificPopup({
-// 								delegate : 'a',
-// 								type : 'image',
-// 								gallery : {
-// 									enabled : true
-// 								}
-// 							});
-							/* Gallery Three pop up*/
-// 							$('.gallery-three').magnificPopup({
-// 								delegate : 'a',
-// 								type : 'image',
-// 								gallery : {
-// 									enabled : true
-// 								}
-// 							});
-							/* Gallery Three pop up*/
-// 							$('.gallery-three').magnificPopup({
-// 								delegate : 'a',
-// 								type : 'image',
-// 								gallery : {
-// 									enabled : true
-// 								}
-// 							});
-							/* Gallery Three pop up*/
-							$('.gallery-three').magnificPopup({
-								delegate : 'a',
-								type : 'image',
-								gallery : {
-									enabled : true
-								}
-							});
 
-							/* Gallery Three pop up
-							-----------------------------------------*/
-							$('.gallery-three').magnificPopup({
-								delegate : 'a',
-								type : 'image',
-								gallery : {
-									enabled : true
-								}
-							});
-
-							/* Collapse menu after click 
-							-----------------------------------------*/
+							/* Collapse menu after click */
 							$('#tmNavbar a').click(function() {
 								$('#tmNavbar').collapse('hide');
 
 								adjustHeightOfPage($(this).data("no")); // Adjust page height       
 							});
-							
+
 							/* Collapse menu after click */
 							$(function() {
 								$("#signin").on("click", function() {
@@ -622,6 +532,7 @@
 									return false;
 								});
 							});
+
 							
 							/* Collapse menu after click 
 							-----------------------------------------*/
@@ -632,6 +543,7 @@
 									return false;
 								});
 							});
+
 
 							/* Collapse menu after click 
 							-----------------------------------------*/
@@ -646,7 +558,7 @@
 							-----------------------------------------*/
 							$(function() {
 								$("#board").on("click", function() {
-									location.href = 'board/';
+									location.href = 'board/list';
 									return false;
 								});
 							});
@@ -713,47 +625,72 @@
 			loadGoogleMap(); // Google Map
 		});
 		
-		a();
+
+		a(1);
 		
-		function a() {
+		function a(pageNumber) {
 			$.ajax({
-				url: '/info.json',
+// 				url: '/info.json',
+				url: '/info2',
+				data: { "page": pageNumber },
 				success: function(res) {
+					var list = res.list;
 					var tag = '';
-					for(var i = 0; i < res.length; i++) {
-						tag += `<div class="grid-item">\
+					for(var i = 0; i < list.length; i++) {
+						tag += `<div class="grid-item" data-toggle="modal" data-target="#myModal" onclick="changeid('${list[i].videoId}')">\
 									<figure class="effect-bubba">\
-										<img src="${res[i].thumbnailUrl}" alt="Image" class="img-fluid tm-img">\
+										<img src="" alt="" class="">\
 										<figcaption>\
 											<h3 class="tm-figure-title">\
-											${res[i].id}\
-												<span><strong>${res[i].title}</strong></span>\
+												[${list[i].id}]\
+												<span>${list[i].title}</span>\
 											</h3>\
-											<p class="tm-figure-description"></p>\
-											<a class="btn btn-primary" data-toggle="modal" href="#modal-video"><i class="fa fa-play"></i> watch video</a>\
-											<div class="modal fade" id="modal-video" style="display: none;">\
-											  <div class="modal-dialog">\
-											    <div class="modal-content">\
-											      <div class="modal-header">\
-											        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">close <i class="fa fa-times"></i></button>\
-											      </div>\
-											      <div class="modal-body">\
-											        <iframe type="text/html" width="640" height="360" src="//www.youtube.com/embed/${res[i].videoId}" frameborder="0" allowfullscreen=""></iframe>\
-											        <p>Your video</p>\
-											      </div>\
-											    </div>\
-											  </div>\
-											</div>\
 										</figcaption>\
+											
+											<img border="0" alt="${list[i].id}" src="${list[i].thumbnailUrl}" width="300" height="200">\
+											
 									</figure>\
 								</div>`;
 					}
 					
+					var startPage = res.startPage;
+					var endPage = res.endPage;
+					var totalPage = res.totalPage;
+					var nowPage = res.nowPage;
+					
+					var pageHtml = '<div id="pagination"><ul class="pagination">';
+					
+					if(startPage > 1) {
+						pageHtml += `<li class="page-item"><a class="page-link" href="javascript:a(${i}-5)">이전</a></li>`;
+					}
+					
+					for(var i = startPage; i <= endPage; i++) {
+						pageHtml += `<li class="page-item"><a class="page-link" href="javascript:a(${i})">${i}</a></li>`;
+					}
+
+					if(totalPage > endPage) {
+						pageHtml += `<li class="page-item"><a class="page-link" href="javascript:a(${i}+5)">다음</a></li>`;
+					}
+					pageHtml += '</ul></div>';
+					
+					$('.gallery-three .grid-item').remove();
 					$('#three').after(tag);
+					
+					$('#pagination').remove();
+					$('#full-three').append(pageHtml);
 				}
 			});
 		}
-	</script>
+		
+		function changeid(videoId) {
+			$('#player').attr('src', 'http://www.youtube.com/embed/' + videoId+'?autoplay=1&mute=1');
+		}
+// 		<p>
+// 		An image as a link: <a href="https://www.youtube.com/embed/WmHSJTOpjwc">
+// 		<img border="0" alt="W3Schools" src="logo_w3s.gif" width="100" height="100">
+// 		</a>
+// 		</p>
 
+	</script>
 </body>
 </html>

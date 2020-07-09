@@ -2,16 +2,16 @@
 <html lang="en">
 <head th:replace="common/head">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-S
+
 </head>
-S
+
 
 <body>
 		<nav th:replace="common/nav"></nav>
 
 		<div class="jumbotron">
 				<div class="container text-center">
-						<form method="post" action="/board/write">
+						<form method="post" action="/board/write" >
 								<div class="form-group">
 										<label for="title">Title:</label>
 										<input type="text" class="form-control" name="bbsTitle" id="title">
@@ -21,9 +21,10 @@ S
 										<textarea class="form-control" rows="5" name="bbsContent" id="content"></textarea>
 								</div>
 								<div class="form-group">
-										<form method="post" enctype="multipart/form-data">
+										<form method="post" action="/upload" enctype="multipart/form-data">
 												<input type="file" name="file" multiple>
-												<input type="submit" value="업로드">
+												<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+												<!-- <input type="submit" value="업로드"> -->
 										</form>
 								</div>
 								<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
@@ -45,21 +46,25 @@ S
 	
 	
 	$("#complete").click(function() {
+		var formData = new FormData($('form')[0]);
         $.ajax({
-           url: 'board/write',
+           url: 'write',
            type: 'post',
-           data: $("form").serialize(),//form에 있는거 serialize()
+           processData: false,
+           contentType:false,
+//            data: $("form").serialize(),//form에 있는거 serialize()
+           data: formData,//form에 있는거 serialize()
            success: function(res) {
 
-              if(res == "0") {
+              if(res == "0") {	
                  // 팝업 띄우기      주소,       이름,           옵션
                  window.open(
-                       "/signin", 
+                       "/loginResistForm", 
                        "login", 
                        "width=300 height=200");
               } else {
                  alert("글쓰기 완료되었습니다.");
-                 location = "/board/";
+                 history.go(-1);
               }
               
            }

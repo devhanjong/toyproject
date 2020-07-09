@@ -115,6 +115,10 @@ public class BoardController {
 			boardRepository.save(board);
 		}
 		return "1";
+		
+		
+		
+		
 	}
 
 	
@@ -158,6 +162,10 @@ public class BoardController {
 		
 		return "index";
 	}
+	
+	
+	
+
 	
 }
 

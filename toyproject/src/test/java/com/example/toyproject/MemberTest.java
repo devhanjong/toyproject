@@ -69,6 +69,9 @@ public class MemberTest {
 			board.setBbsId(i);
 			board.setBbsTitle("title" + i);
 			board.setMember(mem);
+			board.setOFileName("origianl"+i);
+			board.setSFileName("save"+i);
+			board.setSFileURL("url"+ i+ ".png" );
 			board.setViews(i);
 			board.setBbsContent("content" + i);
 			br.save(board);

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -45,5 +46,14 @@ public class Board {
 	@JsonIgnore
 	@OneToMany(mappedBy = "board")
 	private List<Comment> comments = new ArrayList<>();
+	} 
+			
+	@Column(name="o_file_name", length =1000)
+	private String oFileName;
+	@Column(name="s_file_name", length =1000)
+	private String sFileName ;
 	
-} 
+	@Column(name="s_file_url", length =1000)
+	private String sFileURL ;
+
+}
