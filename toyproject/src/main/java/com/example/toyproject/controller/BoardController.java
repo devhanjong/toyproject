@@ -67,7 +67,7 @@ public class BoardController {
 	
 
 
-	@GetMapping("/") 
+	@GetMapping("") 
 	public String board(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
 		int startPage = (page - 1) / 10 * 10 + 1;
 		int endPage = startPage + 9;
@@ -87,7 +87,7 @@ public class BoardController {
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("page", page);
 		System.out.println(startPage +"@@"+endPage+"@@"+totalPage+"@@"+page);
-		return "board/list";
+		return "board/list";   
 	}
 
 
@@ -98,20 +98,20 @@ public class BoardController {
 		return "/board/write";
 	}
 	
-	@RequestMapping("/write") 
+	@PostMapping("/write") 
 	@ResponseBody
 	//@ResponseBody가 없을시에는 모든 자료형으로 리턴이 가능
 	public String boardWritePost(@ModelAttribute Board board) {
 		System.out.println("@#$@#$@#"+board);
 		/* 로그인 여부 확인 (세션의 값 확인) */
-		Member member = (Member) session.getAttribute("user_info");
+		Member member = (Member) session.getAttribute("userid");
 		if (member == null) { // 로그인 X
 			System.out.println(member);
 			return "0";
 		} else { // 로그인 O
 			System.out.println(member+"!@$!$");
-			String userId = member.getUid();
-			board.setAuthorMember(userId); 
+//			String userId = member.getUid();
+//			board.setMemberId(userId); 
 			boardRepository.save(board);
 		}
 		return "1";
@@ -132,12 +132,12 @@ public class BoardController {
 //		 member = HSR.getSession().getServletContext();
 //		System.out.println(member);
 		/* 로그인 여부 확인 (세션의 값 확인) */
-		Member member =  (Member) session.getAttribute("user_info");
+		Member member =  (Member) session.getAttribute("userid");
 		if (member == null) { // 로그인 X
 			return "alert/writeAfterSign";
 		} else { // 로그인 O	
-		String usereId = member.getUid();
-		board.setAuthorMember(usereId);
+//		String usereId = member.getUid();
+//		board.setMemberId(usereId);
 		board.setBbsId(id);
 		boardRepository.save(board);
 		}

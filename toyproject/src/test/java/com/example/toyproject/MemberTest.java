@@ -1,6 +1,7 @@
 package com.example.toyproject;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -10,9 +11,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Commit;
 
 import com.example.toyproject.model.Board;
+import com.example.toyproject.model.Comment;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.model.MemberRole;
 import com.example.toyproject.repository.BoardRepository;
+import com.example.toyproject.repository.CommentRepository;
 import com.example.toyproject.repository.MemberRepository;
 
 import lombok.extern.java.Log;
@@ -27,6 +30,9 @@ public class MemberTest {
 	@Autowired
 	private BoardRepository br;
 	
+	 @Autowired
+    CommentRepository cr;
+	 
 	@Autowired
 	PasswordEncoder pe;
 
@@ -56,12 +62,13 @@ public class MemberTest {
 
 	@Test
 	public void testInsert2() {
+		Member mem = mr.findById("user31").get();
 		for (int i = 0; i <= 100; i++) {
+			
 			Board board = new Board();
 			board.setBbsId(i);
 			board.setBbsTitle("title" + i);
-			board.setAuthorMember("author" + i + "member");
-			board.setComments(i);
+			board.setMember(mem);
 			board.setViews(i);
 			board.setBbsContent("content" + i);
 			br.save(board);
@@ -75,4 +82,12 @@ public class MemberTest {
 
 	}
 
+	@Test
+	public void testRead2() {
+    	Board board = br.findById(98L).get();
+    	System.out.println("@$%@$^"+board);
+    	 List<Comment> commentlist = cr.findByBoard(board);
+    	 System.out.println("%^*%$*^"+ commentlist);
+	}
+	
 }

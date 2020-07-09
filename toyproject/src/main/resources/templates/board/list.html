@@ -25,7 +25,7 @@ tbody>tr:hover {
 					<tr th:each="board : ${list}" th:attr="id=${board.bbsId}">
 						<td th:text="${board.bbsId}"></td>
 						<td th:text="${board.bbsTitle}"></td>
-						<td th:text="${board.AuthorMember}"></td>
+						<td th:text="${board.member.uid}"></td>
 						<td th:text="${board.bbsContent}"></td>
 					</tr>
 				</tbody>

@@ -49,6 +49,7 @@ HttpSession session;
 		while(authlist.hasNext()) {
 			GrantedAuthority authority = authlist.next();
 			if(authority.getAuthority().equals("ROLE_ADMIN")) {
+				session.setAttribute("authority", authority.getAuthority());
 				url="/admin";
 			}
 	}
@@ -57,7 +58,6 @@ HttpSession session;
 		session.setAttribute("userid", mem.getUid());
 		session.setAttribute("userName", mem.getUname());
 		session.setAttribute("userEmail", mem.getUemail());
-		
 		
 
 		res.sendRedirect(url);

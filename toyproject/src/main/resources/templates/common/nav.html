@@ -27,16 +27,16 @@
 			
 		
 			<ul class="nav navbar-nav navbar-right">
-				<li th:if="${session.user_info} == null"> 
+				<li th:if="${session.userid} == null"> 
 					<a href="/loginResistForm">
 						<span class="glyphicon glyphicon-log-in"></span>
 						Sign in
 					</a>
 				</li>
-				<li th:unless="${session.user_info} == null"> <!--null이 아니면(unless) -->
+				<li th:unless="${session.userid} == null"> <!--null이 아니면(unless) -->
 					<a href="/logout">
 						<span class="glyphicon glyphicon-log-out"></span>
-						Sign out [[${session.user_info.uname} + '님 반갑습니다.']]
+						Sign out [[${session.userid} + '님 반갑습니다.']]
 					</a>
 				</li>
 			</ul>

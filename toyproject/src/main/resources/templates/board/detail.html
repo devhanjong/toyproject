@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
- <head th:replace="common/head"> 
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="common/head">
 <style>
 tbdoy>tr:hover {
 	cursor: pointer;
@@ -12,29 +13,75 @@ tbdoy>tr:hover {
 <body>
 	<nav th:replace="common/nav"></nav>
 
+
 	<div class="container">
-		<div class="panel-group">
-			<div class="panel panel-default">
-				<div class="panel-heading" th:text="${board.bbsId}"></div>
-				<div class="panel-heading" th:text="${board.bbsTitle}"></div>
-				<div class="panel-body" th:text="${board.bbsContent}"></div>
-				<div class="panel-footer" th:text="${board.AuthorMember}"></div>
+		<div class="col-xs-12" style="margin: 15px auto;">
+			<label style="font-size: 20px;">
+				<span class="glyphicon glyphicon-list-alt"></span>
+				게시글 상세
+			</label>
+		</div>
+
+		<div class="col-xs-12">
+			<form action="/insertProc" method="post">
+				<dl class="dl-horizontal">
+					<dt>제목</dt>
+					<dd>[[${board.bbsTitle}]]</dd>
+					<br>
+					<dt>작성자</dt>
+					<dd>[[${board.member.uid}]]</dd>
+					<br>
+					<dt>작성날짜</dt>
+					<dd>
+						<fmt:formatDate th:value="${board.bbsCreateDate}" />
+					</dd>
+					<br>
+					<dt>첨부파일</dt>
+					<dd>
+						<a href="/fileDown/${files.bno}">${files.fileOriName}</a>
+					</dd>
+					<br>
+					<dt>내용</dt>
+					<dd>[[${board.bbsContent}]]</dd>
+				</dl>
+			</form>
+			<div class="btn-group btn-group-sm" role="group" style="float: right;">
+				<button type="button" class="btn btn-default" id="list">목록</button>
+				<button th:if="${session.userid}==${board.member.uid}" type="button" class="btn btn-default" id="update">수정</button>
+				<button th:if="${session.userid}==${board.member.uid}" type="button" class="btn btn-default" id="delete">삭제</button>
+				<button type="button" class="btn btn-default" sec:authorize="hasRole('ROLE_ADMIN')" id="admindelete">삭제</button>
 			</div>
 		</div>
-	</div>
-	<div class="container text-right">
-		<button type="button" class="btn btn-default" id="list">목록</button>
-		<button type="button" class="btn btn-default" id="update">수정</button>
-		<button type="button" class="btn btn-default" id="delete">삭제</button>
-	</div>
+
+		<div class="container">
+			<label for="content">comment</label>
+			<form name="commentInsertForm">
+				<div class="input-group">
+					<input type="hidden" name="boardNo" th:value="${board.bbsId}" />
+					<input type="hidden" name="userid" th:value="${session.userid}" />
+					<input type="text" class="form-control" id="content" name="content" placeholder="내용을 입력하세요.">
+					<span class="input-group-btn">
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+						<button class="btn btn-default" type="button" name="commentInsertBtn">등록</button>
+					</span>
+				</div>
+			</form>
+		</div>
+
+		<div class="container">
+			<div class="commentList"></div>
+		</div>
 
 
- <footer th:replace="common/footer"></footer> 
+
+
+
+		<footer th:replace="common/footer"></footer>
 
 
 
 
-	<script>
+		<script>
 		$("#list").click(function() {
 			location = "/board/";
 			return false;
@@ -45,13 +92,141 @@ tbdoy>tr:hover {
 			return false;
 		});
 		
-		$("#delete").click(function() {
+		//관리자 삭제
+		$("#admindelete").click(function() {
 			if(confirm("삭제하시겠습니까?")){
 			location = "/board/delete/" + [[${board.bbsId}]];
 			}
 			return false;
 		});
-	</script>
+		
+		//삭제
+		$("#delete").click(function() {
+			if(confirm("삭제하시겠습니까?")){
+				
+			location = "/board/delete/" + [[${board.bbsId}]];
+			}
+			return false;
+		});
+	
+		</script>
+
+		<script>
+		var bno = [[${board.bbsId}]]; //게시글 번호
+ 
+		$('[name=commentInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시 
+    	
+			var insertData = $('[name=commentInsertForm]').serialize(); 
+    	
+    		commentInsert(insertData); //Insert 함수호출(아래)
+		});
+ 
+ 
+ 
+		//댓글 목록 
+		function commentList(){
+   			 $.ajax({
+    		    url : '/comment/list',
+        		type : 'get',
+      		    data : {'BoardNo': [[${board.bbsId}]]},
+    		    success : function(data) {
+     		       var a =''; 
+     		       console.log(a);
+      		      $.each(data, function(key, value){ 
+        		        a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+         		        a += '<div class="commentInfo'+value.commentPrimeNo+'">'+'댓글번호 : '+value.commentNo+' / 작성자 : '+value.userid;
+        		        a += '<a onclick="commentUpdate('+value.commentPrimeNo+',\''+value.content+'\');"> 수정 </a>';
+        		        a += '<a onclick="commentDelete('+value.commentPrimeNo+')"> 삭제 </a> </div>';
+        		        a += '<div class="commentContent'+value.commentPrimeNo+'"> <p> 내용 : '+value.content +'</p>';
+        		        a += '</div></div>';
+       		     })
+        		   $(".commentList").html(a);
+   		    	 }
+   			 });
+		
+		}
+ 
+		//댓글 등록
+		function commentInsert(insertData){
+  		  $.ajax({
+   		     url : '/comment/insert',
+    		    type : 'post',
+    		    data : insertData,
+     		   success : function(data){
+		            if(data == 1) {  //1이면 성공 0이면 실패 
+		                commentList(); //댓글 작성 후 댓글 목록 reload
+		                alert("등록되었습니다.")
+		                $('[name=content]').val('');
+		            }
+		        }
+   		 });
+		}
+ 
+		//댓글 수정 - 댓글 내용 출력을 input 폼으로 변경 
+		function commentUpdate(commentPrimeNo, content){
+    		var a ='';
+		    
+		    a += '<div class="input-group">';
+		    a += '<input type="text" class="form-control" name="content_'+commentPrimeNo+'" value="'+content+'"/>';
+		    a += '<span class="input-group-btn"><button class="btn btn-default" type="button" onclick="commentUpdateProc('+commentPrimeNo+');">수정</button> </span>';
+		    a += '</div>';
+		    
+		    $('.commentContent'+commentPrimeNo).html(a);
+		    
+		}
+ 
+		//댓글 수정
+		function commentUpdateProc(commentPrimeNo){
+    		var updateContent = $('[name=content_'+commentPrimeNo+']').val();
+    			$.ajax({
+			        url : '/comment/update',
+			        type : 'post',
+			        data : {
+			        	'content' : updateContent, 
+			        	'commentPrimeNo' : commentPrimeNo,
+			        	'[[${_csrf.parameterName}]]' : "[[${_csrf.token}]]"
+			        },
+			        success : function(data){
+			            if(data == 1){
+			            	alert("수정했습니다.")
+			            	commentList([[${board.bbsId}]]); //댓글 수정후 목록 출력 
+			            }
+			            else{
+			            	alert("작성자만 수정가능합니다.")
+			            	commentList([[${board.bbsId}]]);
+			            }
+			        }
+			    });
+		}
+ 
+		//댓글 삭제 
+		function commentDelete(commentPrimeNo){
+		    $.ajax({
+		        url : '/comment/delete/'+commentPrimeNo,
+		        type : 'post',
+		        data : {
+		        	'commentPrimeNo' : commentPrimeNo,
+		        	'[[${_csrf.parameterName}]]' : "[[${_csrf.token}]]"
+		        },
+		        success : function(data){
+		           if(data==1) {
+		        	   alert("삭제되었습니다.")
+		        	   commentList([[${board.bbsId}]])   //댓글 삭제후 목록 출력 
+		           }
+		           else{
+		        	   alert("작성자만 삭제가능합니다.")
+		        	   commentList([[${board.bbsId}]])
+		           }
+		        }
+		    });
+		}
+ 
+ 
+		$(document).ready(function(){
+    		commentList();       //페이지 로딩시 댓글 목록 출력 
+		});
+		
+</script>
 
 </body>
 </html>

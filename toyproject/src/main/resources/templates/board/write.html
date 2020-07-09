@@ -46,7 +46,7 @@ S
 	
 	$("#complete").click(function() {
         $.ajax({
-           url: 'write',
+           url: 'board/write',
            type: 'post',
            data: $("form").serialize(),//form에 있는거 serialize()
            success: function(res) {
