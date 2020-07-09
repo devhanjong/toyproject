@@ -85,8 +85,8 @@ public class MemberTest {
 	public void testRead2() {
     	Board board = br.findById(98L).get();
     	System.out.println("@$%@$^"+board);
-    	 List<Comment> commentlist = cr.findByBoard(board);
-    	 System.out.println("%^*%$*^"+ commentlist);
+//    	 List<Comment> commentlist = cr.findByBoard(board);
+//    	 System.out.println("%^*%$*^"+ commentlist);
 	}
 	
 }
