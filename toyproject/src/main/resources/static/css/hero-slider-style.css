@@ -266,7 +266,7 @@ Single slide style
 .cd-hero-slider .cd-bg-video-wrapper {
   /* hide video on mobile device */
   /*display: none;*/
-  position: absolute;
+  position: rel;
   top: 0;
   left: 0;
   width: 100%;
@@ -281,7 +281,7 @@ Single slide style
   max-width: none;
   height: auto;
   width: auto;
-  position: absolute;
+  position:relative;
   left: 50%;
   top: 50%;
   bottom: auto;

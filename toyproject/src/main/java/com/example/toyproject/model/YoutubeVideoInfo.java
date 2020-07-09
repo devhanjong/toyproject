@@ -9,8 +9,7 @@ import lombok.Data;
 @Data
 public class YoutubeVideoInfo {
 	@Id
-	
-	private long Id;
+	private long id;
 	private String description;
 	private String thumbnailUrl;
 	private String title; 		//게시글 생성자
