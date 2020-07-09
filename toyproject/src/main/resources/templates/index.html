@@ -15,7 +15,219 @@
 <link rel="stylesheet" href="css/hero-slider-style.css">
 <link rel="stylesheet" href="css/magnific-popup.css">
 <link rel="stylesheet" href="css/tooplate-style.css">
+<style>
+@import
+	url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic)
+	;
 
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	line-height: 1.5;
+	color: #323232;
+	font-size: 15px;
+	font-weight: 400;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+}
+
+.heading-title {
+	margin-bottom: 20px;
+}
+
+.text-center {
+	text-align: center;
+}
+
+.heading-title h3 {
+	margin-bottom: 0;
+	letter-spacing: 2px;
+	font-weight: normal;
+}
+
+.p-top-30 {
+	padding-top: 30px;
+}
+
+.half-txt {
+	width: 60%;
+	margin: 0 auto;
+	display: inline-block;
+	line-height: 25px;
+	color: #7e7e7e;
+}
+
+.text-uppercase {
+	text-transform: uppercase;
+}
+
+.team-member, .team-member .team-img {
+	position: relative;
+}
+
+.team-member {
+	overflow: hidden;
+}
+
+.team-member, .team-member .team-img {
+	position: relative;
+}
+
+.team-hover {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	margin: 0;
+	border: 20px solid rgba(0, 0, 0, 0.1);
+	background-color: rgba(255, 255, 255, 0.90);
+	opacity: 0;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.team-member:hover .team-hover .desk {
+	top: 35%;
+}
+
+.team-member:hover .team-hover, .team-member:hover .team-hover .desk,
+	.team-member:hover .team-hover .s-link {
+	opacity: 1;
+}
+
+.team-hover .desk {
+	position: absolute;
+	top: 0%;
+	width: 100%;
+	opacity: 0;
+	-webkit-transform: translateY(-55%);
+	-ms-transform: translateY(-55%);
+	transform: translateY(-55%);
+	-webkit-transition: all 0.3s 0.2s;
+	transition: all 0.3s 0.2s;
+	padding: 0 20px;
+}
+
+.desk, .desk h4, .team-hover .s-link a {
+	text-align: center;
+	color: #222;
+}
+
+.team-member:hover .team-hover .s-link {
+	bottom: 10%;
+}
+
+.team-member:hover .team-hover, .team-member:hover .team-hover .desk,
+	.team-member:hover .team-hover .s-link {
+	opacity: 1;
+}
+
+.team-hover .s-link {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	opacity: 0;
+	text-align: center;
+	-webkit-transform: translateY(45%);
+	-ms-transform: translateY(45%);
+	transform: translateY(45%);
+	-webkit-transition: all 0.3s 0.2s;
+	transition: all 0.3s 0.2s;
+	font-size: 35px;
+}
+
+.desk, .desk h4, .team-hover .s-link a {
+	text-align: center;
+	color: #222;
+}
+
+.team-member .s-link a {
+	margin: 0 10px;
+	color: #333;
+	font-size: 16px;
+}
+
+.team-title {
+	position: static;
+	padding: 20px 0;
+	display: inline-block;
+	letter-spacing: 2px;
+}
+
+.team-title h5 {
+	margin-bottom: 0px;
+	display: block;
+	text-transform: uppercase;
+}
+
+.team-title span {
+	font-size: 12px;
+	text-transform: uppercase;
+	color: beige;
+	letter-spacing: 1px;
+}
+
+.col-half-offset {
+	margin-left: 3%
+}
+
+.my_padding {
+	margin-left: px;
+	padding-right: 5px;
+	padding-left: 1px;
+}
+
+.my_roding {
+	margin-right: -.9375rem;
+	margin-left: -40.9375rem;
+}
+
+@media ( min-width : 992px) {
+	.member1 {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 50%;
+	}
+}
+
+@media ( min-width : 992px) {
+	.member2 {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 45%;
+	}
+}
+
+@media ( min-width : 992px) {
+	.member3 {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 31%;
+	}
+}
+
+@media ( min-width : 992px) {
+	.member4 {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 31%;
+	}
+}
+
+@media ( min-width : 992px) {
+	.member5 {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 30%;
+	}
+}
+</style>
 </head>
 
 <body>
@@ -85,7 +297,7 @@
 
 			<!-- Page 1 Gallery One -->
 			<li class="selected">
-				<div class="cd-full-width">
+				<div class="cd-full-width" style="background-image: url(img/29.jpg);    background-size: 100%;    background-repeat: no-repeat;    background-position: 50%;">
 					<div class="container-fluid js-tm-page-content" data-page-no="1" data-page-type="gallery">
 						<div class="tm-img-gallery-container">
 							<div class="tm-img-gallery-container">
@@ -96,14 +308,8 @@
 									</h2>
 									<p class="tm-text">어서오세요 여기는 펫타그램이라는 커뮤니티입니다 자세한것은 게시판으로 통해서 보시면 됩니다</p>
 								</div>
-								<div class="container">
-									<img src="img/tm-img-17.jpg" class="float-right" alt="Image" width="500" height="500" style="float: right;">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
+								
+					
 
 			<!-- Page 2 Gallery Two -->
 			<li>
@@ -307,37 +513,129 @@
 
 			<!-- Page 4 About -->
 			<li>
-				<div class="cd-full-width">
-					<div class="container-fluid js-tm-page-content tm-page-width tm-pad-b" data-page-no="4">
-						<div class="row tm-white-box-margin-b">
-							<div class="col-xs-12">
-								<div class="tm-flex">
-									<div class="tm-bg-white-translucent text-xs-left tm-textbox tm-textbox-padding">
-										<h2 class="tm-text-title">Team Petagrem!!</h2>
-										<p class="tm-text"><strong> 
-											반려동물이라는 주제로 사람들의 의사와 정보를 주고 받을수 있는 곳.
-											<br>
-											지난 한달간의 배움을 실제로 구현해 보는 우리만의 미니프로젝트!!
-											</strong>
-										</p>
+				<div class="cd-full-width" style="background-color: #16b5a3">
+					<div
+						class="container-fluid js-tm-page-content tm-page-width tm-pad-b"
+						data-page-no="4">
+						<div class="container">
+							<div class="row ">
+								<div class="heading-title text-center">
+									<h3 class="text-uppercase">펫타그램 조직원</h3>
+									<p class="p-top-30 half-txt">이야기의 결말은 충분하지 않지만 이야기에 대한 요구가
+										너무 많습니다!ㅋㅋ</p>
+								</div>
+
+								<div class="col-lg-2 col-half-offset my_padding member1">
+									<div class="team-member">
+										<div class="team-img">
+											<img src="img/2.jpg." alt="team member">
+										</div>
+										<div class="team-hover">
+											<div class="desk">
+												<h1>훌륭한 사람과 어리석은 사람의 차이는 불과 한 걸음 차이다. -손창호-</h1>
+
+											</div>
+
+										</div>
+									</div>
+
+									<div class="team-title">
+										<h5>손창호</h5>
+										<span>잘생긴형 &amp; 기획자</span>
+									</div>
+								</div>
+								<div class="col-lg-2 col-half-offset my_padding member2">
+									<div class="team-member">
+										<div class="team-img">
+											<img src="img/3.jpg" alt="team member" class="img-responsive">
+										</div>
+										<div class="team-hover">
+											<div class="desk">
+												<h1>피할수 없으면 즐겨라 -김경환-</h1>
+
+											</div>
+
+										</div>
+									</div>
+									<div class="team-title">
+										<h5>김경환</h5>
+										<span>귀여운형 &amp; 게시판담당</span>
+									</div>
+								</div>
+								<div class="col-lg-2 col-half-offset my_padding member3">
+									<div class="team-member">
+										<div class="team-img ">
+											<img src="img/1.jpg" alt="team member" class="img-responsive">
+										</div>
+										<div class="team-hover">
+											<div class="desk">
+												<h1>단 1분의 비트코인이 몇십년의 실패를 보장한다 -한종훈-</h1>
+
+											</div>
+											<div class="s-link">
+												<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+													class="fa fa-twitter"></i></a> <a href="#"><i
+													class="fa fa-google-plus"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="team-title">
+										<h5>한종훈</h5>
+										<span>매력포텐터지는형 &amp;로그인 회원가입 보안</span>
+
+
+									</div>
+								</div>
+								<div class="col-lg-2 col-half-offset my_padding member4">
+									<div class="team-member">
+										<div class="team-img">
+											<img src="img/5.jpg" alt="team member" class="img-responsive">
+										</div>
+										<div class="team-hover">
+											<div class="desk">
+												<h1>내 비장의 무기는 아직 손안에 있다 그것은 던파 -강철민-</h1>
+
+											</div>
+
+										</div>
+									</div>
+									<div class="team-title">
+										<h5>강철민</h5>
+										<span>던파잘하는형 &amp; 탬플릿 구성및 활용 </span>
+
+
+									</div>
+								</div>
+
+								<div class="col-lg-2 col-half-offset my_padding member5">
+									<div class="team-member">
+										<div class="team-img">
+											<img src="img/4.jpg" alt="team member" class="img-responsive">
+										</div>
+										<div class="team-hover">
+											<div class="desk">
+												<h1>도중에 포기하지 말라. 망설이지 말라. 최후의 성공을 거둘 때까지 밀고 나가자 할수잇다
+													-박대남-</h1>
+
+											</div>
+											<div class="s-link">
+												<a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i
+													class="fa fa-twitter"></i></a> <a href="#"><i
+													class="fa fa-google-plus"></i></a>
+											</div>
+										</div>
+									</div>
+									<div class="team-title">
+										<h5>박대남</h5>
+										<span>막둥이 &amp; Cuty Boy</span>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						<div class="row tm-white-box-margin-b">
-							<div class="col-xs-12">
-								<div class="tm-flex"></div>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="tm-flex"></div>
-							</div>
-						</div>
 					</div>
+				</div> <!-- .cd-full-width -->
 			</li>
+>
 
 			<!-- Page 5 Contact Us -->
 			<li>
