@@ -28,22 +28,16 @@
 			</form>
 
 			<form method="post" action="/memberInfoModification" id="register" class="input-group">
-				<div class="form-group">
-<!-- 				<input type="text" name="uid" class="input-field" placeholder="User ID" id=userId th:value="${session.user_info.uid}" required> -->
-				<div class="check_font" id="id_check"></div>
-				</div>
+				<input type="hidden" name="uid" class="input-field" id=userId th:value="${session.userid}" required>
+				<input type="hidden" name="uname" class="input-field" id=userName th:value="${session.userName}" required>
 				<div class="form-group">
 				<input type="password" name="upw" class="input-field" id=userpw placeholder="Enter Password" required>
 				<input type="password" name="upw2" class="input-field" id=userpw2 placeholder="Check your Password" required>
 				<div class="check_font" id="pw_check"></div>
 				</div>
-				<input type="text" name="uname" class="input-field" placeholder="Your Name" required>
-				<input type="email" name="uemail" class="input-field" placeholder="Your Email" required>
-				<input type="checkbox" name="roles[0].rolename" value="BASIC" checked>BASIC
-				<input type="checkbox" name="roles[1].rolename" value="MANAGER" checked>MANAGER
-				<input type="checkbox" name="roles[2].rolename" value="ADMIN" checked>ADMIN
+				<input type="email" name="uemail" class="input-field"  th:value="${session.userEmail}" placeholder="Your Email" required>
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-				<button class="submit">REGISTER</button>
+				<button class="submit" id="reg_submit">REGISTER</button>
 			</form>
 		</div>
 	</div>
@@ -80,7 +74,6 @@
 		var userpw1 = $('#userpw').val();
 		var userpw2 = $('#userpw2').val();
 		var csrf = $('#register > [name=_csrf]').val();
-		console.log(csrf)
 		$.ajax({
 			url : 'loginResistForm/pwCheck' , 
 			type : 'post',
@@ -89,6 +82,7 @@
 				'_csrf' : csrf
 			},
 			success : function(data) {
+				
 				
 				if (data == 1) {
 						// 1 : 다르면
@@ -99,7 +93,7 @@
 				else {
 							$('#pw_check').text('비밀번호가 일치합니다.');
 							$('#pw_check').css('color', 'green');
-							$("#reg_submit").attr("disabled", true);	
+							$("#reg_submit").attr("disabled", false);	
 					}
 				}, error : function() {
 						console.log("실패");

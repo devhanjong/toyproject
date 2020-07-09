@@ -30,6 +30,7 @@ tbody>tr:hover {
 					</tr>
 				</tbody>
 			</table>
+		
 
 			<ul class="pagination">
 				<!-- 이전 페이지 넘어가기 버튼 추가 -->
@@ -64,7 +65,7 @@ tbody>tr:hover {
 
     $("tbody > tr").click(function() {
       var id = $(this).attr("id");
-      // 			var id = jQuery(this).attr("id");
+      //var id = jQuery(this).attr("id");
       location = "/board/" + id;
     });
   </script>

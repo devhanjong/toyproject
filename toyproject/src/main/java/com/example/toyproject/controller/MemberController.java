@@ -1,13 +1,14 @@
 package com.example.toyproject.controller;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,21 +28,37 @@ public class MemberController {
 	@Autowired
 	MemberRepository memberRepository;
 	
+	@Autowired
+	HttpSession session;
+	
 	@RequestMapping("/loginResistForm")
 	public void signup() {
 		
 	}
+
 	
-	@RequestMapping("/memberInfoModification")
+	
+	@GetMapping("/memberInfoModification")
 	public void memberInfoModification() {
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		System.out.println(auth.getName());
 		
 		
 	}
 	
+	@PostMapping("/memberInfoModification")
+	public String memberInfoModification(@ModelAttribute("member") Member member) {
+		String encryptPw = passwordeEncoder.encode(member.getUpw()); 
+		
+		member.setUpw(encryptPw);
+		member.setEnable(1);
+		member.setFailcount(0);
+		
+		memberRepository.save(member);
+		
+		return "/alert/infoModificationResult";
+	}
+
 	
-	@Transactional
+	
 	@PostMapping("/resistResult")
 	public String SignupPost(@ModelAttribute("member") Member member) {
 		//회원가입시 결과화면 

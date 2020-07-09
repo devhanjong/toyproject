@@ -25,6 +25,9 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 @Autowired
 MemberRepository MR;
 
+@Autowired
+HttpSession session;
+
 	
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res,
@@ -49,8 +52,14 @@ MemberRepository MR;
 				url="/admin";
 			}
 	}
+		
+		
+		session.setAttribute("userid", mem.getUid());
+		session.setAttribute("userName", mem.getUname());
+		session.setAttribute("userEmail", mem.getUemail());
+		
+		
 
-		req.setAttribute("user_info", mem);
 		res.sendRedirect(url);
 		
 	}
