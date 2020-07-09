@@ -59,6 +59,7 @@ public class YoutubeController {
 	@GetMapping("/info2")
 	@ResponseBody
 	public Map<String, Object> pageinfo(Model model, @RequestParam(name = "page", defaultValue = "1") int page) {
+		System.out.println("#!%!%"+ page);
 		int startPage = (page - 1) / 10 * 10 + 1;
 		int endPage = startPage + 9;
 		
@@ -78,6 +79,7 @@ public class YoutubeController {
 		map.put("nowPage", page);
 		map.put("startPage", startPage);
 		map.put("endPage", endPage);
+		System.out.println(startPage+"@@"+page+"@@"+endPage+"@@"+totalPage);
 		return map;
 	}
 

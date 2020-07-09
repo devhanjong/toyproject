@@ -22,15 +22,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.toyproject.model.Board;
-import com.example.toyproject.model.FileInfo;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.BoardRepository;
+import com.example.toyproject.repository.MemberRepository;
 
 @RequestMapping("/board") // 하나의 주소로 만들어주는거 /board랑 /write합쳐서 => /board/write로 주소가 지정된다
 @Controller
 public class BoardController {
 	@Autowired
 	BoardRepository boardRepository;
+	@Autowired
+	MemberRepository MR;
 	@Autowired
 	HttpSession session;   
 	
@@ -103,16 +105,14 @@ public class BoardController {
 	@ResponseBody
 	//@ResponseBody가 없을시에는 모든 자료형으로 리턴이 가능
 	public String boardWritePost(@ModelAttribute Board board) {
-		System.out.println("@#$@#$@#"+board);
 		/* 로그인 여부 확인 (세션의 값 확인) */
-		Member member = (Member) session.getAttribute("userid");
-		if (member == null) { // 로그인 X
-			System.out.println(member);
+		   String id = session.getAttribute("userid").toString();
+		 
+		if (id == null) { // 로그인 X
 			return "0";
 		} else { // 로그인 O
-			System.out.println(member+"!@$!$");
-//			String userId = member.getUid();
-//			board.setMemberId(userId); 
+			Member member = MR.findById(id).get();
+			board.setMember(member); 
 			boardRepository.save(board);
 		}
 		return "1";
