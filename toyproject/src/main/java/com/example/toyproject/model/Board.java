@@ -2,6 +2,7 @@ package com.example.toyproject.model;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,10 +22,20 @@ public class Board {
 	private long bbsId;
 	private String bbsTitle;
 	private String bbsContent;
-	private String AuthorMember; 		//게시글 생성자
+	private String AuthorMember; 		//게시글생성자(ID)
 	
 	@CreationTimestamp
-	private LocalDate bbsCreateDate; 	//게시판 생성일자
-	private int views; 					//게시글 조회수s
-	private int comments;				//게시글 댓글수
+	private LocalDate bbsCreateDate; 	
+	private int views; 				
+	private int comments;			
+	
+	
+	@Column(name="o_file_name", length =1000)
+	private String oFileName;
+	@Column(name="s_file_name", length =1000)
+	private String sFileName ;
+	
+	@Column(name="s_file_url", length =1000)
+	private String sFileURL ;
+
 }

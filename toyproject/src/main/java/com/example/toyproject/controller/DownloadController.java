@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DownloadController {
 	@GetMapping("/download")
 	public ResponseEntity<Resource> download() throws Exception {
-		File file = new File("");
+		File file = new File("f:/spring-boot-logo.png");
 		InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
 		return ResponseEntity.ok()
 				.header("content-disposition", "filename=" + URLEncoder.encode(file.getName(), "utf-8"))
