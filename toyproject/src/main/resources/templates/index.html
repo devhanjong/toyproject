@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -30,7 +29,7 @@
 
 					<a class="navbar-brand text-uppercase" href="/home">
 						<i class="fa fa-gears tm-brand-icon"></i>
-						펫타그램
+						Petagrem
 					</a>
 
 					<button class="navbar-toggler hidden-lg-up" type="button" data-toggle="collapse" data-target="#tmNavbar">&#9776;</button>
@@ -43,10 +42,10 @@
 								</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#0" data-no="2" id="board">자유 게시판</a>
+								<a class="nav-link" href="#0" data-no="2" id="board">Petmunity</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="#0" data-no="3">Multi Three</a>
+								<a class="nav-link" href="#0" data-no="3">Petube</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="#0" data-no="4">Our Team</a>
@@ -287,7 +286,7 @@
 
 			<!-- Page 3 Gallery Three -->
 			<li>
-				<div class="cd-full-width">
+				<div class="cd-full-width" id="full-three">
 					<div class="container-fluid js-tm-page-content" data-page-no="3" data-page-type="gallery">
 						<div class="tm-img-gallery-container">
 							<div class="tm-img-gallery gallery-three">
@@ -414,7 +413,7 @@
 			</li>
 		</ul>
 
-		<footer class="tm-footer">
+		<footer class="tm-footer" style="padding-top: 0;">
 
 			<div class="tm-social-icons-container text-xs-center">
 				<a href="#" class="tm-social-link">
@@ -656,12 +655,14 @@
 			loadGoogleMap(); // Google Map
 		});
 		
-		a();
+
+		a(1);
 		
-		function a() {
+		function a(pageNumber) {
 			$.ajax({
 // 				url: '/info.json',
 				url: '/info2',
+				data: { "page": pageNumber },
 				success: function(res) {
 					var list = res.list;
 					var tag = '';
@@ -682,7 +683,31 @@
 								</div>`;
 					}
 					
+					var startPage = res.startPage;
+					var endPage = res.endPage;
+					var totalPage = res.totalPage;
+					var nowPage = res.nowPage;
+					
+					var pageHtml = '<div id="pagination"><ul class="pagination">';
+					
+					if(startPage > 1) {
+						pageHtml += `<li class="page-item"><a class="page-link" href="javascript:a(${i-5})">이전</a></li>`;
+					}
+					
+					for(var i = startPage; i <= endPage; i++) {
+						pageHtml += `<li class="page-item"><a class="page-link" href="javascript:a(${i})">${i}</a></li>`;
+					}
+
+					if(totalPage > endPage) {
+						pageHtml += `<li class="page-item"><a class="page-link" href="javascript:a(${i+5}">다음</a></li>`;
+					}
+					pageHtml += '</ul></div>';
+					
+					$('.gallery-three .grid-item').remove();
 					$('#three').after(tag);
+					
+					$('#pagination').remove();
+					$('#full-three').append(pageHtml);
 				}
 			});
 		}
