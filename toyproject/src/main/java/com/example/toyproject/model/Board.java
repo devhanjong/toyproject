@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,6 +28,7 @@ import lombok.Setter;
 public class Board {
 	@Id
 	@Convert(converter = LocalDateConverter.class)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long bbsId;
 	private String bbsTitle;
 	private String bbsContent;
@@ -38,8 +41,8 @@ public class Board {
 	@CreationTimestamp
 	private LocalDate bbsCreateDate; 	//게시판 생성일자
 	
-	
-	private int views; 					//게시글 조회수
+	 
+	private int views;  					//게시글 조회수
 	
 	
 	//보드 -> 댓글 매핑 양방향 
