@@ -2,7 +2,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>펫타그램</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css" href="/css/style1.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -14,22 +14,11 @@
 	<div class="wrap">
 		<div class="form-wrap">
 			<div class="button-wrap">
-				<div id="btn"></div>
-				<button type="button" class="togglebtn" onclick="register()">회원정보수정</button>
+				<button class="submit">회원정보수정</button>
 			</div>
 
-			<form method="post" id="login" class="input-group">
-				<div th:if="${errorMessage != null}">
-					<h2 th:text="${errorMessage}"></h2>
-				</div>
-				<div th:if="${param.logout !=null}">
-					<h2>You have been logged out.</h2>
-				</div>
-			</form>
-
 			<form method="post" action="/memberInfoModification" id="register" class="input-group">
-				<input type="hidden" name="uid" class="input-field" id=userId th:value="${session.userid}" required>
-				<input type="hidden" name="uname" class="input-field" id=userName th:value="${session.userName}" required>
+				<input type="text" name="uname" class="input-field" id=userName th:value="${session.userName}" required>
 				<div class="form-group">
 				<input type="password" name="upw" class="input-field" id=userpw placeholder="Enter Password" required>
 				<input type="password" name="upw2" class="input-field" id=userpw2 placeholder="Check your Password" required>
