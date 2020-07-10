@@ -58,7 +58,9 @@ compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141
 	testImplementation 'org.springframework.security:spring-security-test'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-
+compile("org.springframework.boot:spring-boot-starter-mail")
+  	compile "org.springframework:spring-context-support"
+  	compile "com.sun.mail:javax.mail"
 }
 
 test {
