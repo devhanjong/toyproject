@@ -26,7 +26,7 @@ public class YoutubeComment {
 	private int commentNo;
 	
 	@ManyToOne
-	@JoinColumn(name = "YoutubeVieoInfo_id")
+	@JoinColumn(name = "YoutubeVideoInfo_id")
 	private YoutubeVideoInfo youtubeVideoInfo;
 	
 	private String content;
