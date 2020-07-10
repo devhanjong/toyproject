@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters.LocalDateConverter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,17 +29,19 @@ import lombok.Setter;
 public class Board {
 	@Id
 	@Convert(converter = LocalDateConverter.class)
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long bbsId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long bbsId; 
 	private String bbsTitle;
+	
+	@Column(length = 2048)
 	private String bbsContent;
 	
 	
 	@ManyToOne
 	@JoinColumn(name =  "member_id")
 	private Member member;
-	
-	@CreationTimestamp
+	 
+	@UpdateTimestamp
 	private LocalDate bbsCreateDate; 	//게시판 생성일자
 	
 	 
@@ -50,14 +53,5 @@ public class Board {
 	@OneToMany(mappedBy = "board")
 	private List<Comment> comments = new ArrayList<>();
 	 
-			
-	@Column(name="o_file_name", length =1000)
-	private String oFileName;
-
-	@Column(name="s_file_name", length =1000)
-	private String sFileName;
-	
-	@Column(name="s_file_url", length =1000)
-	private String sFileURL ;
 
 }

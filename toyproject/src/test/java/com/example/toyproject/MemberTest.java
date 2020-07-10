@@ -53,7 +53,7 @@ public class MemberTest {
 			}
 			member.setRoles(Arrays.asList(role));
 
-			mr.save(member);
+			mr.save(member); 
 		}
 	}
 
@@ -62,7 +62,6 @@ public class MemberTest {
 		Member mem = mr.findById("user31").get();
 		for (int i = 0; i <= 100; i++) {
 			Board board = new Board();
-			board.setBbsId(i);
 			board.setBbsTitle("title" + i);
 			board.setMember(mem);
 //			board.setOFileName("origianl"+i);

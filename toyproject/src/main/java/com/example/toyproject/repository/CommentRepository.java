@@ -16,6 +16,7 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	
 //	@Query(nativeQuery = true, value = "select")
 	public List<Comment> findByBoard(Board board);
-
+	
+	public void deleteByBoard(Board board);
 
 }

@@ -2,9 +2,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <title>펫타그램</title>
-
 <link rel="stylesheet" type="text/css" href="/css/style1.css">
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
@@ -12,16 +10,15 @@
   <script type="text/javascript" sec:authorize="!isAuthenticated()">
         location.href = "/home"
     </script>
+    
 	<div class="wrap">
 		<div class="form-wrap">
 			<div class="button-wrap">
-			    <i class="fa fa-adjust" aria-hidden="true"></i>
-			
 				<button class="submit">회원정보수정</button>
 			</div>
 
 			<form method="post" action="/memberInfoModification" id="register" class="input-group">
-				<input type="text" name="uname" class="input-field" id=userName th:value="${session.userName}" required>
+				<input type="text" name="uname" class="input-field" id=userName placeholder="Enter Name" th:value="${session.userName}" required>
 				<div class="form-group">
 				<input type="password" name="upw" class="input-field" id=userpw placeholder="Enter Password" required>
 				<input type="password" name="upw2" class="input-field" id=userpw2 placeholder="Check your Password" required>
@@ -29,9 +26,8 @@
 				</div>
 				<input type="email" name="uemail" class="input-field"  th:value="${session.userEmail}" placeholder="Your Email" required>
 				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-				<button class="submit" id="reg_submit">정보수정</button>
+				<button class="submit" id="reg_submit">REGISTER</button>
 			</form>
-				<button class="submit" id="reg_submit1">HOME</button>
 		</div>
 	</div>
 	
@@ -62,11 +58,6 @@
 </script>
 	
 <script>
-	$("#reg_submit1").on("click", function(){
-		location.href="home";
-	});
-	
-
 // 패스워드 유효성 검사 같으면 0 다르면 1
 	$("#userpw2").blur(function() {
 		var userpw1 = $('#userpw').val();

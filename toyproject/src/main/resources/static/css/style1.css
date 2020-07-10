@@ -73,7 +73,7 @@
     padding: 10px 30px;
     cursor: pointer;
     display: block;
-    margin: auto;
+    margin: 10px;
     background: linear-gradient(to right, blue, violet);
     border: 0;
     outline: none;

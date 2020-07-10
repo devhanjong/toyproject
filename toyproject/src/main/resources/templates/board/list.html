@@ -19,6 +19,7 @@ tbody>tr:hover {
 						<th>번호</th>
 						<th>제목</th>
 						<th>작성자</th>
+						<th>작성일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -26,7 +27,7 @@ tbody>tr:hover {
 						<td th:text="${board.bbsId}"></td>
 						<td th:text="${board.bbsTitle}"></td>
 						<td th:text="${board.member.uid}"></td>
-						<td th:text="${board.bbsContent}"></td>
+						<td th:text="${board.bbsCreateDate}"></td>
 					</tr>
 				</tbody>
 			</table>
@@ -54,7 +55,6 @@ tbody>tr:hover {
 		</div>
 	</div>
 
-   <footer th:replace="/common/footer"> </footer>   
 
 	
 

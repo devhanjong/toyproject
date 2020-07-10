@@ -13,7 +13,7 @@
 }
 .form-wrap {
     width: 380px;
-    height: 540px;
+    height: 580px;
     position: relative;
     margin: 6% auto;
     background: #fff;
@@ -73,7 +73,7 @@
     padding: 10px 30px;
     cursor: pointer;
     display: block;
-    margin: auto;
+    margin: 10px;
     background: linear-gradient(to right, blue, violet);
     border: 0;
     outline: none;
@@ -89,7 +89,7 @@ span {
     position: absolute;
 }
 #login {
-    left: 5000px;
+    left: 50px;
 }
 #register {
     left: 450px;

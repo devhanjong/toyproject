@@ -31,29 +31,17 @@ tbdoy>tr:hover {
 					<dt>작성자</dt>
 					<dd>[[${board.member.uid}]]</dd>
 					<br>
-					<dt>작성날짜</dt>
-					<dd>
-						<fmt:formatDate th:value="${board.bbsCreateDate}" />
-					</dd>
-					<br>
-					<dt>첨부파일</dt>
-					<dd>
-						<a href="/fileDown/${files.bno}">${files.fileOriName}</a>
-					</dd>
-					<br>
 					<dt>내용</dt>
 					<dd>[[${board.bbsContent}]]</dd>
 					<br>
-					<dt>첨부이미지</dt>
-					<div class="panel-footer" th:text="${board.sFileURL}"></div>
 				</dl>
 			</form>
 			<div class="btn-group btn-group-sm" role="group" style="float: right;">
 				<button type="button" class="btn btn-default" id="list">목록</button>
 				<button th:if="${session.userid}==${board.member.uid}" type="button" class="btn btn-default" id="update">수정</button>
 				<button th:if="${session.userid}==${board.member.uid}" type="button" class="btn btn-default" id="delete">삭제</button>
+				<button type="button" class="btn btn-default" sec:authorize="hasRole('ROLE_ADMIN')" id="adminupdate">수정</button>
 				<button type="button" class="btn btn-default" sec:authorize="hasRole('ROLE_ADMIN')" id="admindelete">삭제</button>
-				
 			</div>
 		</div>
 
@@ -80,7 +68,6 @@ tbdoy>tr:hover {
 
 
 
-		<footer th:replace="common/footer"></footer>
 
 
 
@@ -92,13 +79,22 @@ tbdoy>tr:hover {
 		});
 		
 		$("#update").click(function() {
+			if(confirm("수정하시겠습니까?")){
 			location = "/board/update/" + [[${board.bbsId}]]; 
+			return false;
+			}
+		});
+		//관리자 수정
+		$("#adminupdate").click(function() {
+			if(confirm("관리자 권한으로 수정합니다. 수정하시겠습니까?")){
+			location = "/board/update/" + [[${board.bbsId}]]; 
+			}
 			return false;
 		});
 		
 		//관리자 삭제
 		$("#admindelete").click(function() {
-			if(confirm("삭제하시겠습니까?")){
+			if(confirm("관리자 권한으로 삭제합니다. 삭제하시겠습니까?")){
 			location = "/board/delete/" + [[${board.bbsId}]];
 			}
 			return false;

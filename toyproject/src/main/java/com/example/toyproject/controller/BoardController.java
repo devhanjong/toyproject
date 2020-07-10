@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.toyproject.model.Board;
+import com.example.toyproject.model.Comment;
 import com.example.toyproject.model.Member;
 import com.example.toyproject.repository.BoardRepository;
+import com.example.toyproject.repository.CommentRepository;
 import com.example.toyproject.repository.MemberRepository;
 
 @RequestMapping("/board") // 하나의 주소로 만들어주는거 /board랑 /write합쳐서 => /board/write로 주소가 지정된다
@@ -34,7 +36,10 @@ public class BoardController {
 	@Autowired
 	MemberRepository MR;
 	@Autowired
-	HttpSession session;   
+	HttpSession session; 
+	@Autowired
+	CommentRepository CR;
+	
 	
 	@Autowired
 	HttpServletRequest HSR;
@@ -97,7 +102,7 @@ public class BoardController {
 	
 
 	@GetMapping("/write") // board패키지 만들어주고 "/board/wrtie
-	public String boardWrite() {
+	public String boardWrite() { 
 		return "/board/write";
 	}
 	
@@ -105,17 +110,19 @@ public class BoardController {
 	@ResponseBody
 	//@ResponseBody가 없을시에는 모든 자료형으로 리턴이 가능
 	public String boardWritePost(@ModelAttribute Board board) {
+		String result = "1";
+		
 		/* 로그인 여부 확인 (세션의 값 확인) */
-		   String id = session.getAttribute("userid").toString();
-		 
-		if (id == null) { // 로그인 X
-			return "0";
+		if (null == session.getAttribute("userid")) { // 로그인 X
+			result = "0";
+			return result;
 		} else { // 로그인 O
+			String id = session.getAttribute("userid").toString();
 			Member member = MR.findById(id).get();
 			board.setMember(member); 
 			boardRepository.save(board);
 		}
-		return "1";
+		return result;
 		
 		
 		
@@ -129,22 +136,22 @@ public class BoardController {
 		Board board = data.get();
 //		System.out.println(board);
 		model.addAttribute("board", board);
-		return "board/update";
+		return "board/update"; 
 	}
 	
-	@PostMapping("/update/{id}")
+	@PostMapping("/update/{id}")  
 	public String boardUpdatePost(HttpServletRequest HSR, @ModelAttribute Board board, @PathVariable("id") long id) {
 //		 member = HSR.getSession().getServletContext();
-//		System.out.println(member);
+		System.out.println("@#%@#%@#%"+board);
 		/* 로그인 여부 확인 (세션의 값 확인) */
-		Member member =  (Member) session.getAttribute("userid");
+		Member member = MR.findById(session.getAttribute("userid").toString()).get();
 		if (member == null) { // 로그인 X
 			return "alert/writeAfterSign";
 		} else { // 로그인 O	
-//		String usereId = member.getUid();
-//		board.setMemberId(usereId);
+			
+		board.setMember(member); 
 		board.setBbsId(id);
-		boardRepository.save(board);
+		boardRepository.save(board); 
 		}
 		return "redirect:/board/" + id;
 	}
@@ -152,6 +159,13 @@ public class BoardController {
 	@GetMapping("/delete/{id}")
 	public String boardDelete(@PathVariable("id") long id) {
 		// jpa로 해당 아이디 게시물을 조회해야
+		Board deleteboard = boardRepository.findById(id).get();
+		List<Comment> comment = CR.findByBoard(deleteboard);
+		for (Comment comment2 : comment) {
+			comment2.setBoard(null);
+		}
+		deleteboard.setComments(null);
+		deleteboard.setMember(null);
 		boardRepository.deleteById(id);
 		return "redirect:/board/";
 	}
