@@ -60,7 +60,9 @@ compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.141
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 compile("org.springframework.boot:spring-boot-starter-mail")
   	compile "org.springframework:spring-context-support"
-  	compile "com.sun.mail:javax.mail"
+  	compile('org.springframework.boot:spring-boot-starter-web')
+   compile('org.springframework.boot:spring-boot-starter-mail')
+   testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 test {
