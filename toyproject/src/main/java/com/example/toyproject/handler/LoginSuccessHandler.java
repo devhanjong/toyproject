@@ -32,7 +32,6 @@ HttpSession session;
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest req, HttpServletResponse res,
 			Authentication authentication) throws IOException, ServletException {
-		log.error("enabled");
 		
 		clearAuthenticationAttributes(req);
 		
@@ -50,7 +49,7 @@ HttpSession session;
 			GrantedAuthority authority = authlist.next();
 			if(authority.getAuthority().equals("ROLE_ADMIN")) {
 				session.setAttribute("authority", authority.getAuthority());
-				url="/admin";
+				url="/admin/home";
 			}
 	}
 		

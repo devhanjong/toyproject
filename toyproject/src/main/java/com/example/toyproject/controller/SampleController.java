@@ -15,7 +15,7 @@ public class SampleController {
 	public String home1() {
 		return "index";
 	}
-	
+	 
 	
 	@GetMapping("/")
 	public String index() {
