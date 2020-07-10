@@ -51,7 +51,6 @@ public class BoardController {
 		Board board = data.get();
 		// Board board = boardRepository.findById(id).get(); 위의 2줄을 한줄로
 		
-		System.out.println(board);
 		model.addAttribute("board", board);// k,v
 		return "board/detail";
 	}
@@ -59,11 +58,9 @@ public class BoardController {
 	// 뭘 수정할지 조회해야
 	@GetMapping("/{id}") 
 	public String boardDetail(Model model, @PathVariable("id") long id) {
-		System.out.println("확인!@@@" + id);
 		// jpa로 해당 아이디 게시물을 조회해야
 		Optional<Board> opt = boardRepository.findById(id); // 옵셔널클래스컬렉션타입 데이터타입은 보드
 		Board board = opt.get();
-		System.out.println(board);
 		model.addAttribute("board", board);
 		return "board/detail";
 	}
@@ -94,7 +91,6 @@ public class BoardController {
 		model.addAttribute("endPage", endPage);
 		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("page", page);
-		System.out.println(startPage +"@@"+endPage+"@@"+totalPage+"@@"+page);
 		return "board/list";   
 	}
 
@@ -134,7 +130,6 @@ public class BoardController {
 	public String boardUpdate(Model model, @PathVariable("id") long id) {
 			Optional<Board> data = boardRepository.findById(id);// jpa로 해당아이디게시물을 조회
 		Board board = data.get();
-//		System.out.println(board);
 		model.addAttribute("board", board);
 		return "board/update"; 
 	}
@@ -142,7 +137,6 @@ public class BoardController {
 	@PostMapping("/update/{id}")  
 	public String boardUpdatePost(HttpServletRequest HSR, @ModelAttribute Board board, @PathVariable("id") long id) {
 //		 member = HSR.getSession().getServletContext();
-		System.out.println("@#%@#%@#%"+board);
 		/* 로그인 여부 확인 (세션의 값 확인) */
 		Member member = MR.findById(session.getAttribute("userid").toString()).get();
 		if (member == null) { // 로그인 X
